@@ -1,0 +1,197 @@
+<ActionBar>
+    <!-- 
+    Use the NavigationButton as a side-drawer button in Android
+    because ActionItems are shown on the right side of the ActionBar
+    -->
+    <NavigationButton ios:visibility="collapsed" icon="res://menu" (tap)="onDrawerButtonTap()"></NavigationButton>
+    <!-- 
+    Use the ActionItem for IOS with position set to left. Using the
+    NavigationButton as a side-drawer button in iOS is not possible,
+    because its function is to always navigate back in the application.
+    -->
+    <ActionItem icon="res://menu" android:visibility="collapsed" (tap)="onDrawerButtonTap()" ios.position="left">
+    </ActionItem>
+    <Label fontsize="22" text="BechoBaba"></Label>
+</ActionBar>
+
+<ScrollView class="fontstyle" orientation="vertical">
+    <GridLayout orientation="vertical" columns="*" rows="auto,auto,auto,auto,auto">
+        <FlexboxLayout marginBottom="10" col="0" row="0" flexWrap="wrap" width="100%">
+            <StackLayout  class="stacklayoutcss" width="100%" stretch="aspectFill" orientation="vertical">
+                <Label marginTop="10" textAlignment="center" row="0" class="fontstyle" paddingLeft="10" fontSize="20" color="#000000"
+                    text="Hello User!"></Label>
+                <Label marginBottom="10" textAlignment="center" row="1" class="fontstyle" marginRight="20" fontSize="14" color="#8d8d8d"
+                    text="Here are few things you might be intrested in"></Label>
+            </StackLayout>
+
+            <StackLayout class="stacklayoutcss" [height]="photoHeight" [width]="photoWidth"
+                stretch="aspectFill" orientation="vertical">
+                <Label col="0" text="&#xf015;" class="nt-icon fas labelicon"></Label>
+                <Label col="1" text="Homes" class="p-r-10 labelfont"></Label>
+            </StackLayout>
+            <StackLayout class="stacklayoutcss" [height]="photoHeight" [width]="photoWidth"
+                stretch="aspectFill" orientation="vertical">
+                <Label col="0" text="&#xf7d9;" class="nt-icon fas labelicon"></Label>
+                <Label col="1" text="Services" class="p-r-10 labelfont"></Label>
+            </StackLayout>
+            <StackLayout class="stacklayoutcss" [height]="photoHeight" [width]="photoWidth"
+                stretch="aspectFill" orientation="vertical">
+                <Label col="0" text="&#xf5e4;" class="nt-icon fas labelicon"></Label>
+                <Label col="1" text="cars" class="p-r-10 labelfont"></Label>
+            </StackLayout>
+            <StackLayout class="stacklayoutcss" [height]="photoHeight" [width]="photoWidth"
+                stretch="aspectFill" orientation="vertical">
+                <Label col="0" text="&#xf206;" class="nt-icon fas labelicon"></Label>
+                <Label col="1" text="Bikes" class="p-r-10 labelfont"></Label>
+            </StackLayout>
+
+
+        </FlexboxLayout>
+        <FlexboxLayout marginBottom="10" col="0" row="1" flexWrap="wrap" width="100%">
+            <StackLayout class="stacklayoutcss" [height]="photoHeight" [width]="photoWidth"
+                stretch="aspectFill" orientation="vertical">
+                <Label col="0" text="&#xf0f2;" class="nt-icon fas labelicon"></Label>
+                <Label col="1" text="Jobs" class="p-r-10 labelfont"></Label>
+            </StackLayout>
+            <StackLayout class="stacklayoutcss" [height]="photoHeight" [width]="photoWidth"
+                stretch="aspectFill" orientation="vertical">
+                <Label col="0" text="&#xf6d3;" class="nt-icon fas labelicon"></Label>
+                <Label col="1" text="Pets" class="p-r-10 labelfont"></Label>
+            </StackLayout>
+            <StackLayout class="stacklayoutcss" [height]="photoHeight" [width]="photoWidth"
+                stretch="aspectFill" orientation="vertical">
+                <Label col="0" text="&#xf109;" class="nt-icon fas labelicon"></Label>
+                <Label col="1" text="Electronics" class="p-r-10 labelfont"></Label>
+            </StackLayout>
+            <StackLayout class="stacklayoutcss" [height]="photoHeight" [width]="photoWidth"
+                stretch="aspectFill" orientation="vertical">
+                <Label col="0" text="&#xf3cd;" class="nt-icon fas labelicon"></Label>
+                <Label col="1" text="Mobiles" class="p-r-10 labelfont"></Label>
+            </StackLayout>
+            <StackLayout class="stacklayoutcss" [height]="photoHeight" [width]="photoWidth"
+                stretch="aspectFill" orientation="vertical">
+                <Label col="0" text="&#xf015;" class="nt-icon fas labelicon"></Label>
+                <Label col="1" text="Homes" class="p-r-10 labelfont"></Label>
+            </StackLayout>
+            <StackLayout class="stacklayoutcss" [height]="photoHeight" [width]="photoWidth"
+                stretch="aspectFill" orientation="vertical">
+                <Label col="0" text="&#xf7d9;" class="nt-icon fas labelicon"></Label>
+                <Label col="1" text="Services" class="p-r-10 labelfont"></Label>
+            </StackLayout>
+            <StackLayout class="stacklayoutcss" [height]="photoHeight" [width]="photoWidth"
+                stretch="aspectFill" orientation="vertical">
+                <Label col="0" text="&#xf5e4;" class="nt-icon fas labelicon"></Label>
+                <Label col="1" text="cars" class="p-r-10 labelfont"></Label>
+            </StackLayout>
+            <StackLayout class="stacklayoutcss" [height]="photoHeight" [width]="photoWidth"
+                stretch="aspectFill" orientation="vertical">
+                <Label col="0" text="&#xf206;" class="nt-icon fas labelicon"></Label>
+                <Label col="1" text="Bikes" class="p-r-10 labelfont"></Label>
+            </StackLayout>
+        </FlexboxLayout>
+
+        <StackLayout marginBottom="10" col="0" row="2" backgroundColor="#e4edf6">
+
+
+            <ScrollView orientation="vertical">
+                <StackLayout paddingTop="10">
+                    <GridLayout backgroundColor="#e4edf6" columns="auto,*,auto" rows="auto">
+                        <Label col="0" row="0" class="" paddingLeft="10" fontSize="20" color="#000000"
+                            text="Nearby Ads"></Label>
+                        <Label col="2" row="0" class="" marginRight="20" fontSize="14" color="#8d8d8d"
+                            text="More"></Label>
+                    </GridLayout>
+
+
+                    <ScrollView orientation="horizontal">
+                        <StackLayout orientation="horizontal">
+                            <StackLayout margin="10" class="nearby" padding="10">
+                                <StackLayout class="album-image" height="110" width="125" backgroundImage="~/images/layer4@3x.png"
+                                    borderRadius="5">
+                                </StackLayout>
+                                <Label fontSize="14" class="font-weight-bold" color="#000000" text="2014 Shift"></Label>
+                                <Label fontSize="12" class="font-weight-normal" color="#000000" text="Akkayyapalem"></Label>
+                                <Label fontSize="10" class="font-weight-bold" color="#729acb" text="2,50,000"></Label>
+                            </StackLayout>
+
+                            <StackLayout margin="10" class="nearby" padding="10">
+                                <StackLayout class="album-image" height="110" width="125" backgroundImage="~/images/layer4@3x.png"
+                                    borderRadius="5">
+                                </StackLayout>
+                                <Label fontSize="14" class="font-weight-bold" color="#000000" text="2015 I20"></Label>
+                                <Label fontSize="12" class="font-weight-normal" color="#000000" text="Akkayyapalem"></Label>
+                                <Label fontSize="10" class="font-weight-bold" color="#729acb" text="2,00,000"></Label>
+                            </StackLayout>
+                            <StackLayout margin="10" class="nearby" padding="10">
+                                <StackLayout class="album-image" height="110" width="125" backgroundImage="~/images/layer4@3x.png"
+                                    borderRadius="5">
+                                </StackLayout>
+                                <Label fontSize="14" class="font-weight-bold" color="#000000" text="2000 Alto"></Label>
+                                <Label fontSize="12" class="font-weight-normal" color="#000000" text="Akkayyapalem"></Label>
+                                <Label fontSize="10" class="font-weight-bold" color="#729acb" text="50,000"></Label>
+                            </StackLayout>
+
+                            <StackLayout margin="10" class="nearby" padding="10">
+                                <StackLayout class="album-image" height="110" width="125" backgroundImage="~/images/layer4@3x.png"
+                                    borderRadius="5">
+                                </StackLayout>
+                                <Label fontSize="14" class="font-weight-bold" color="#000000" text="2010 Hero Passion"></Label>
+                                <Label fontSize="12" class="font-weight-normal" color="#000000" text="T C Palem"></Label>
+                                <Label fontSize="10" class="font-weight-bold" color="#729acb" text="10,000"></Label>
+                            </StackLayout>
+                        </StackLayout>
+                    </ScrollView>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+
+        <StackLayout marginBottom="10" col="0" row="3" backgroundColor="#e4edf6">
+
+
+            <ScrollView orientation="vertical">
+                <StackLayout paddingTop="10">
+                    <GridLayout backgroundColor="#e4edf6" columns="auto,*,auto" rows="auto">
+                        <Label col="0" row="0" class="" paddingLeft="10" fontSize="20" color="#000000"
+                            text="Your Last Visited Ads"></Label>
+                        <Label col="2" row="0" class="" marginRight="20" fontSize="14" color="#8d8d8d"
+                            text="More"></Label>
+                    </GridLayout>
+
+
+                    <ScrollView orientation="horizontal">
+                        <StackLayout orientation="horizontal">
+                            <StackLayout margin="10" class="nearby" padding="10">
+                                <StackLayout class="album-image" height="110" width="125" backgroundImage="~/images/layer4@3x.png"
+                                    borderRadius="5">
+                                </StackLayout>
+                                <Label fontSize="14" class="font-weight-bold" color="#000000" text="2014 Shift"></Label>
+                                <Label fontSize="12" class="font-weight-normal" color="#000000" text="Akkayyapalem"></Label>
+                                <Label fontSize="10" class="font-weight-bold" color="#729acb" text="2,50,000"></Label>
+                            </StackLayout>
+
+                            <StackLayout margin="10" class="nearby" padding="10">
+                                <StackLayout class="album-image" height="110" width="125" backgroundImage="~/images/layer4@3x.png"
+                                    borderRadius="5">
+                                </StackLayout>
+                                <Label fontSize="14" class="font-weight-bold" color="#000000" text="2015 I20"></Label>
+                                <Label fontSize="12" class="font-weight-normal" color="#000000" text="Akkayyapalem"></Label>
+                                <Label fontSize="10" class="font-weight-bold" color="#729acb" text="2,00,000"></Label>
+                            </StackLayout>
+                           
+                        </StackLayout>
+                    </ScrollView>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+        <StackLayout col="0" row="4" orientation="horizontal" backgroundColor="#FFFFFF" height="60">
+            <GridLayout rows="*" columns="*,*,*,*,*">
+                <Image col="0" row="0" (tap)="onButtonTap()" height="25" width="25" margin="10" src="~/images/shape2@3x.png"></Image>
+                <Image col="1" row="0" (tap)="onButtonTap()" height="25" width="25" margin="10" src="~/images/shape1@3x.png"></Image>
+                <Image col="2" row="0" (tap)="onButtonTap()" height="60" width="60" margin="10" src="~/images/home@3x.png"></Image>
+                <Image col="3" row="0" (tap)="onButtonTap()" height="25" width="25" margin="10" src="~/images/shape3@3x.png"></Image>
+                <Image col="4" row="0" (tap)="onButtonTap()" height="25" width="25" margin="10" src="~/images/icon04@3x.png"></Image>
+            </GridLayout>
+        </StackLayout>
+
+    </GridLayout>
+</ScrollView>
