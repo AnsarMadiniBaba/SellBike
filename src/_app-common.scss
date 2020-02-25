@@ -41,14 +41,14 @@
     color: const(grey);
 }
 
-.fontstyle{
+*{
     font-family: "Roboto", "Roboto-Light";
    }
 /* Colors */
 $accent: #369;
 
 /* This color was named $ab-background in Theme v1 */
-$complementary: rgb(146, 129, 243);
+$complementary: #2874f0;
 
 /* The variables are loaded before the Core styles */
 @import '~@nativescript/theme/index';
