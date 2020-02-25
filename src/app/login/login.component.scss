@@ -1,6 +1,8 @@
 .page {
     align-items: center;
     flex-direction: column;
+    // background-color: #2874f0;
+    // background-image: linear-gradient(to right, #86a1ce, #2874f0 );
   }
   .form {
     margin-left: 30;
@@ -10,6 +12,7 @@
   }
   
   .logo {
+    color: #2874f0;
     margin-bottom: 12;
     height: 90;
     font-weight: bold;
@@ -20,7 +23,7 @@
     font-weight: 600;
     margin-bottom: 70;
     text-align: center;
-    color: #D51A1A;
+    color: #2874f0;
   }
   
   .input-field {
@@ -52,7 +55,7 @@
   }
   .btn-primary {
     height: 50;
-    background-color: #D51A1A;
+    background-color: #2874f0;
     border-radius: 5;
     font-size: 20;
     font-weight: 600;
@@ -60,4 +63,10 @@
   }
   .btn-primary:disabled {
     opacity: 0.5;
+  }
+
+  .loginlable{
+      text-align: center;
+      font-size: 15px;
+      font-weight: 500;
   }

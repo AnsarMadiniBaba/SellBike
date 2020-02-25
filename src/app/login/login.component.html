@@ -1,6 +1,6 @@
 <FlexboxLayout class="page">
     <StackLayout class="form">
-        <Image class="logo" src="~/images/logo.png"></Image>
+        <!-- <Image class="logo" src="~/images/logo.png"></Image> -->
         <Label class="header" text="BechoBaba"></Label>
 
         <PreviousNextView>
@@ -37,10 +37,16 @@
         <Label *ngIf="isLoggingIn" text="Forgot password?" class="login-label"
             (tap)="forgotPassword()"></Label>
     </StackLayout>
-    <Label class="login-label sign-up-label" (tap)="toggleForm()">
-        <FormattedString>
+    <StackLayout>
+        <!-- <FormattedString>
             <Span [text]="isLoggingIn ? 'Don’t have an account? ' : 'Back to Login'"></Span>
             <Span [text]="isLoggingIn ? 'Sign up' : ''" class="bold"></Span>
-        </FormattedString>
-    </Label>
+        </FormattedString> -->
+        <GridLayout columns="*,*" rows="auto,auto,auto">
+                <Label class="loginlable" row="0" col="0" colSpan="2" text="LOGIN USING"></Label>
+                <StackLayout row="1" col="0" colSpan="2" class="hr m-10"></StackLayout>
+                <Button row="2" col="0" class="-outline bold" text="Google"></Button>
+                <Button row="2" col="1"  class="-outline bold" text="Facebook"></Button>
+            </GridLayout>
+    </StackLayout>
 </FlexboxLayout>

@@ -52,3 +52,18 @@ $complementary: #2874f0;
 
 /* The variables are loaded before the Core styles */
 @import '~@nativescript/theme/index';
+
+.parentelement{
+    background-color: #f1f3f6
+}
+
+.stackheaderunderline {
+    border-bottom-width: 5px;
+    border-bottom-color: #f1f3f6;
+}
+
+.childelementborder {
+       background:white;
+       border-bottom-width: 10px;
+       border-bottom-color: #e2e6ec;
+}
