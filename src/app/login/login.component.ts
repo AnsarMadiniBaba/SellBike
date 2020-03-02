@@ -47,7 +47,7 @@ export class LoginComponent {
 
     login() {
                 this.processing = true;
-                this.routerExtensions.navigate(["/home"], { clearHistory: true });
+                this.routerExtensions.navigate(["/productdetails"], { clearHistory: true });
                 this.processing = false;
                 // this.alert("Your password was success");
                 // this.userService.login(this.user)

@@ -1,0 +1,32 @@
+<ActionBar>
+    <!--Use the NavigationButton as a side-drawer button in Android
+        because ActionItems are shown on the right side of the ActionBar-->
+    <NavigationButton ios:visibility="collapsed" icon="res://menu" (tap)="onDrawerButtonTap()"></NavigationButton>
+    <!-- 
+        Use the ActionItem for IOS with position set to left. Using the
+        NavigationButton as a side-drawer button in iOS is not possible,
+        because its function is to always navigate back in the application.
+        -->
+    <ActionItem icon="res://menu" android:visibility="collapsed" (tap)="onDrawerButtonTap()" ios.position="left">
+    </ActionItem>
+    <Label fontsize="22" text="Rapido Bike"></Label>
+</ActionBar>
+<GridLayout orientation="vertical" columns="*" rows="*">
+<ListView col="0" row="0" class="list-group" [items]="listViewData"backgroundColor="#f8f8f8">
+    <ng-template let-song="item">
+        <GridLayout  orientation="horizontal" class="list-group-item" rows="auto" columns="auto,*,auto">
+            <!-- <Image col="0" row="0" [src]="song.imageUrl" height="75" width="75"></Image> -->
+            <StackLayout (tap)="onNavItemTap('/browse')" col="1" row="0" marginLeft="15">
+                <Label  paddingRight="5" [text]="song.title" class="list-group-item-heading font-weight-bold"
+                    color="#333333"></Label>
+                <Label text="{{ song.artist + ', ' + song.year }}" color="#333333"></Label>
+                <!-- <Label [text]="song.year" color="#333333"></Label> -->
+                <Label [text]="song.restaurant" color="#333333"></Label>
+                <Label text="{{song.date}}" color="#333333"></Label>
+            </StackLayout>
+            <Button col="2" row="0" height="40" horizontalAlignment="right" backgroundColor="#2874f0" color="#ffffff" fontSize="12" paddingRight="5" class="font-weight-bold"
+                text="Delivered"></Button>
+        </GridLayout>
+    </ng-template>
+</ListView>
+</GridLayout>
