@@ -1,21 +1,52 @@
 <ActionBar>
-    <!-- 
-    Use the NavigationButton as a side-drawer button in Android
-    because ActionItems are shown on the right side of the ActionBar
-    -->
-    <NavigationButton ios:visibility="collapsed" icon="res://menu" (tap)="onDrawerButtonTap()"></NavigationButton>
-    <!-- 
-    Use the ActionItem for IOS with position set to left. Using the
-    NavigationButton as a side-drawer button in iOS is not possible,
-    because its function is to always navigate back in the application.
-    -->
-    <ActionItem icon="res://menu" android:visibility="collapsed" (tap)="onDrawerButtonTap()"
-        ios.position="left">
-    </ActionItem>
-    <Label text="Details"></Label>
+    <NavigationButton android.systemIcon="ic_menu_back" (tap)="onNavBtnTap()"></NavigationButton>
+
+    <Label  fontsize="22" text="Details"></Label>
 </ActionBar>
 
-<GridLayout class="page__content">
-    <Label class="page__content-icon far" text="&#xf1ea;"></Label>
-    <Label class="page__content-placeholder" text="<!-- Page content goes here -->"></Label>
-</GridLayout>
+
+<ScrollView backgroundColor="#f8f8f8" orientation="vertical">
+
+    <StackLayout>
+        <StackLayout class="deatilsbody">
+                <Label text="Summary" class="city-name"></Label>
+            <GridLayout columns="75,auto,*" class="detailslist">
+                <Label col="0" text="Name" class=""></Label>
+                <Label col="1" text=":-" class=""></Label>
+                <Label col="2" text="Jack manaaa" class="p-l-15"></Label>
+            </GridLayout>
+
+            <GridLayout columns="75,auto,*" class="detailslist">
+                <Label col="0" text="Phone no" class=""></Label>
+                <Label col="1" text=":-" class=""></Label>
+                <Label col="2" text="(555) 555-1234" class="p-l-15"></Label>
+            </GridLayout>
+
+            <GridLayout columns="75,auto,*" class="detailslist">
+                <Label col="0" text="Address" class=""></Label>
+                <Label col="1" text=":-" class=""></Label>
+                <Label col="2" text="P.O. Box 887 2508 Dolor" class="p-l-15"></Label>
+            </GridLayout>
+            <GridLayout columns="75,auto,*" class="detailslist">
+                <Label col="0" text="Restaurant" class=""></Label>
+                <Label col="1" text=":-" class=""></Label>
+                <Label col="2" text="Mama's Fish House" class="p-l-15"></Label>
+            </GridLayout>
+            <GridLayout columns="75,auto,*" class="detailslist">
+                    <Label col="0" text="Ordered Details" class=""></Label>
+                    <Label col="1" text=":-" class=""></Label>
+                    <Label col="2" text="Veg Dum Biryani, Chiken Dum Biryani, Veg Dum Biryani, Chiken Dum Biryani" class="p-l-15"></Label>
+                </GridLayout>
+            <GridLayout columns="75,auto,*" class="detailslist">
+                <Label col="0" text="Ordered Date" class=""></Label>
+                <Label col="1" text=":-" class=""></Label>
+                <Label col="2" text="12:48 am , 2 March 2020" class="p-l-15"></Label>
+            </GridLayout>
+
+            <GridLayout columns="75,auto,*" class="detailslist">
+                    <button col="2" text="Delivered" class="btndelivered pull-left"></button>
+                </GridLayout>
+
+        </StackLayout>
+    </StackLayout>
+</ScrollView>
