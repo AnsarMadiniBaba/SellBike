@@ -28,7 +28,7 @@ export class ProductdetailsComponent {
         {
             title: "Jack man",
             artist: "(555) 555-1234",
-            year: "P.O. Box 887 2508 Dolor",
+            year: "P.O. Box 887 2508 Dolor 2508 Dolor",
             imageUrl: "~/images/avatar.jpg",
             restaurant: "Mama's Fish House",
             date: "12:48 am , 2 March 2020"
