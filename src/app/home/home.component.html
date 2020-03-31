@@ -11,9 +11,16 @@
     -->
     <ActionItem icon="res://menu" android:visibility="collapsed" (tap)="onDrawerButtonTap()" ios.position="left">
     </ActionItem>
+    <Label fontsize="18" text="&#xf3c5;" class="fas" 
+    (tap)="onNavItemTap('/search')"></Label>
     <Label fontsize="22" text="BechoBaba"></Label>
-</ActionBar>
-
+    <ActionItem  ios.position="right" android.position="popup">
+           
+            <Label fontsize="18" text="&#xf002;" class="fas" 
+                (tap)="onNavItemTap('/search')"></Label>
+        </ActionItem>
+        
+</ActionBar> 
 <ScrollView class="parentelement" orientation="vertical">
     <GridLayout orientation="vertical" columns="*" rows="auto,auto,auto,auto,auto">
         <FlexboxLayout marginBottom="10" col="0" row="0" flexWrap="wrap" width="100%" class="childelementborder">
@@ -27,7 +34,7 @@
             <StackLayout class="stacklayoutcss" [height]="photoHeight" [width]="photoWidth"
                 stretch="aspectFill" orientation="vertical">
                 <Label col="0" text="&#xf015;" class="nt-icon fas labelicon"></Label>
-                <Label col="1" text="Homes" class="p-r-10 labelfont"></Label>
+                <Label col="1" text="Properties" class="p-r-10 labelfont"></Label>
             </StackLayout>
             <StackLayout class="stacklayoutcss" [height]="photoHeight" [width]="photoWidth"
                 stretch="aspectFill" orientation="vertical">
@@ -58,12 +65,12 @@
                 <Label col="0" text="&#xf6d3;" class="nt-icon fas labelicon"></Label>
                 <Label col="1" text="Pets" class="p-r-10 labelfont"></Label>
             </StackLayout>
-            <StackLayout class="stacklayoutcss" [height]="photoHeight" [width]="photoWidth"
+            <StackLayout (tap)="redirecttocatpage()" class="stacklayoutcss" [height]="photoHeight" [width]="photoWidth"
                 stretch="aspectFill" orientation="vertical">
                 <Label col="0" text="&#xf109;" class="nt-icon fas labelicon"></Label>
                 <Label col="1" text="Electronics" class="p-r-10 labelfont"></Label>
             </StackLayout>
-            <StackLayout class="stacklayoutcss" [height]="photoHeight" [width]="photoWidth"
+            <StackLayout (tap)="redirecttocatpage()" class="stacklayoutcss" [height]="photoHeight" [width]="photoWidth"
                 stretch="aspectFill" orientation="vertical">
                 <Label col="0" text="&#xf3cd;" class="nt-icon fas labelicon"></Label>
                 <Label col="1" text="Mobiles" class="p-r-10 labelfont"></Label>
@@ -71,14 +78,14 @@
             <StackLayout class="stacklayoutcss" [height]="photoHeight" [width]="photoWidth"
                 stretch="aspectFill" orientation="vertical">
                 <Label col="0" text="&#xf015;" class="nt-icon fas labelicon"></Label>
-                <Label col="1" text="Homes" class="p-r-10 labelfont"></Label>
+                <Label col="1" text="Properties" class="p-r-10 labelfont"></Label>
             </StackLayout>
             <StackLayout class="stacklayoutcss" [height]="photoHeight" [width]="photoWidth"
                 stretch="aspectFill" orientation="vertical">
                 <Label col="0" text="&#xf7d9;" class="nt-icon fas labelicon"></Label>
                 <Label col="1" text="Services" class="p-r-10 labelfont"></Label>
             </StackLayout>
-            <StackLayout class="stacklayoutcss" [height]="photoHeight" [width]="photoWidth"
+            <StackLayout (tap)="onNavItemTap('/featured')" class="stacklayoutcss" [height]="photoHeight" [width]="photoWidth"
                 stretch="aspectFill" orientation="vertical">
                 <Label col="0" text="&#xf5e4;" class="nt-icon fas labelicon"></Label>
                 <Label col="1" text="cars" class="p-r-10 labelfont"></Label>
@@ -105,7 +112,7 @@
 
                     <ScrollView orientation="horizontal">
                         <StackLayout orientation="horizontal">
-                            <StackLayout margin="10" class="nearby" padding="10">
+                            <StackLayout (tap)="onNavItemTap('/deatils')" margin="10" class="nearby" padding="10">
                                 <StackLayout class="album-image" height="110" width="125" backgroundImage="~/images/carshift.jpg"
                                     borderRadius="5">
                                 </StackLayout>
@@ -160,7 +167,7 @@
 
                     <ScrollView orientation="horizontal">
                         <StackLayout orientation="horizontal">
-                            <StackLayout margin="10" class="nearby" padding="10">
+                            <StackLayout (tap)="onNavItemTap('/deatils')" margin="10" class="nearby" padding="10">
                                 <StackLayout class="album-image" height="110" width="125" backgroundImage="~/images/carshift.jpg"
                                     borderRadius="5">
                                 </StackLayout>
@@ -185,4 +192,10 @@
         </StackLayout>
 
     </GridLayout>
+
 </ScrollView>
+<FlexboxLayout verticalAlignment="bottom" justifyContent="flex-end" height="10%" width="100%" id="addButtonContainer"
+left="0" marginBottom="10">
+<Button class="add-button" row="0" col="1" text="Post Ad" (tap)="navigateAdd()"></Button>
+</FlexboxLayout> 
+ 

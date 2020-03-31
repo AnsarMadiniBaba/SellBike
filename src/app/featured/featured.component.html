@@ -1,21 +1,58 @@
 <ActionBar>
-    <!-- 
-    Use the NavigationButton as a side-drawer button in Android
-    because ActionItems are shown on the right side of the ActionBar
-    -->
-    <NavigationButton ios:visibility="collapsed" icon="res://menu" (tap)="onDrawerButtonTap()"></NavigationButton>
-    <!-- 
-    Use the ActionItem for IOS with position set to left. Using the
-    NavigationButton as a side-drawer button in iOS is not possible,
-    because its function is to always navigate back in the application.
-    -->
-    <ActionItem icon="res://menu" android:visibility="collapsed" (tap)="onDrawerButtonTap()"
-        ios.position="left">
-    </ActionItem>
-    <Label text="Featured"></Label>
-</ActionBar>
+    <NavigationButton android.systemIcon="ic_menu_back" (tap)="onNavBtnTap()"></NavigationButton>
 
-<GridLayout class="page__content">
-    <Label class="page__content-icon fas" text="&#xf005;"></Label>
-    <Label class="page__content-placeholder" text="<!-- Page content goes here -->"></Label>
-</GridLayout>
+    <Label fontsize="22" text="Electronics"></Label>
+</ActionBar>
+<StackLayout class="page" backgroundColor="#f8f8f8" orientation="vertical">
+    
+        <StackLayout>
+                <GridLayout class="p-0 m-0" columns="*,auto,auto" rows="auto"> 
+                        <Button col="1" row="0"  class="-outline" text="Short" textWrap="true"></Button>
+                     
+                        <Button col="2" row="0"  class="-outline" text="Filter" textWrap="true"></Button>
+                    </GridLayout>
+        </StackLayout>
+    <RadListView id="list-view" [items]="news" separatorColor="transparent" height="100%">
+        <ng-template tkListItemTemplate let-item="item">
+            <StackLayout>
+                <GridLayout rows="*" backgroundColor="White">
+                    <GridLayout rows="*" columns="*">
+                        <!-- <Image src="{{ item.urlToImage }}" stretch="aspectFill" height="200"></Image> -->
+
+
+                        <RadListView selectionBehavior="Press" (itemSelected)="onItemSelected($event)"  width="100%" id="list-views" [items]="item.source" separatorColor="transparent"
+                            height="100%">
+                            <ListViewLinearLayout tkListViewLayout scrollDirection="Horizontal"></ListViewLinearLayout>
+
+                            <ng-template tkListItemTemplate let-event="item">
+
+                                <StackLayout orientation="horizontal">
+                                    <Image src="{{ event.name }}" stretch="aspectFill" height="110" width="15%"></Image>
+
+                                </StackLayout>
+                            </ng-template>
+                        </RadListView>
+                        <GridLayout verticalAlignment="top">
+                            <StackLayout>
+                                <!-- <Label text="this" class="pull-right"></Label> -->
+                                <Label col="0" text="&#xf004;" class="nt-icon fas labelicon pull-right"></Label>
+                            </StackLayout>
+                        </GridLayout>
+                    </GridLayout>
+                </GridLayout>
+                <StackLayout  backgroundColor="White">
+                    <Label  class="cost   p-0 m-0" text="{{ 'Rs '+item.cost }}" textWrap="true"></Label>
+                    <Label   class="title p-0 m-0" text="{{ 'Hundai i20 '+item.title }}"  textWrap="true"></Label>
+                    <Label class="title   p-0 m-0" text="2012-40000km"  textWrap="true"></Label>
+                    <GridLayout class="p-0 m-0" columns="*,auto" rows="auto"> 
+                    <!-- <Label col="0" row="0" text="&#xf3c5;" class="nt-icon labelicon fas pull-left"></Label> -->
+                    <Label class="location   p-0 m-0" col="0" row="0" text="Maripalam, vizag"  textWrap="true"></Label>
+                    <Label class="postdate   p-0 m-0" col="1" row="0" text="Today"  textWrap="true"></Label>
+                    <!-- <Button col="1" row="0"  class="btn-sm pull-right -primary -rounded-sm" text="Buy Now" textWrap="true"></Button> -->
+                </GridLayout>
+                </StackLayout>
+            </StackLayout>
+        </ng-template>
+    </RadListView>
+
+</StackLayout>

@@ -1,19 +1,150 @@
 <ActionBar>
-    <NavigationButton android.systemIcon="ic_menu_back" (tap)="onNavBtnTap()"></NavigationButton>
+    <!-- <NavigationButton android.systemIcon="ic_menu_back" (tap)="onNavBtnTap()"></NavigationButton> -->
+    <!-- <ActionButton (tap)="onNavBtnTap()" isArrow="true"></ActionButton> -->
+    <!-- <NavigationButton icon="res://ic_arrow_back_black_24dp" (tap)="goBack()"></NavigationButton> -->
+    <NavigationButton fontsize="15"  position="left" icon="font://&#xf060;" class="fas fa-sm" (tap)="onNavBtnTap()"></NavigationButton>
 
-    <Label  fontsize="22" text="Details"></Label>
+    <Label fontsize="22" text="Electronics"></Label>
 </ActionBar>
 
 
 <ScrollView backgroundColor="#f8f8f8" orientation="vertical">
+    <GridLayout orientation="vertical" columns="*" rows="auto,auto,auto,auto,auto">
+        <StackLayout marginBottom="10" col="0" row="0" class="childelementborder">
 
-    <StackLayout>
+            <SearchBar class="searchbar" hint="Search: Eg.Refigerator" [text]="searchPhrase" (textChange)="onTextChanged($event)"
+                (clear)="onClear($event)" (submit)="onSubmit($event)">
+            </SearchBar>
+
+        </StackLayout>
+        <StackLayout marginBottom="10" col="0" row="1" class="childelementborder">
+
+
+            <ScrollView orientation="vertical">
+                <StackLayout paddingTop="10">
+                    <GridLayout class="stackheaderunderline" columns="auto,*,auto" rows="auto">
+                        <Label col="0" row="0" class="" paddingLeft="10" fontSize="20" color="#000000" text="Popular Products"></Label>
+                        <Label col="2" row="0" class="" marginRight="20" fontSize="14" color="#8d8d8d" text="View All"></Label>
+                    </GridLayout>
+
+
+                    <ScrollView orientation="horizontal">
+                        <StackLayout orientation="horizontal">
+                            <StackLayout margin="10" class="nearby" padding="10">
+                                <StackLayout class="album-image" height="110" width="125" backgroundImage="~/images/carshift.jpg"
+                                    borderRadius="5">
+                                </StackLayout>
+                                <Label fontSize="14" class="font-weight-bold" color="#000000" text="2014 Shift"></Label>
+                                <Label fontSize="12" class="font-weight-normal" color="#000000" text="Akkayyapalem"></Label>
+                                <Label fontSize="10" class="font-weight-bold" color="#729acb" text="2,50,000"></Label>
+                            </StackLayout>
+
+                            <StackLayout margin="10" class="nearby" padding="10">
+                                <StackLayout class="album-image" height="110" width="125" backgroundImage="~/images/i20car.jpg"
+                                    borderRadius="5">
+                                </StackLayout>
+                                <Label fontSize="14" class="font-weight-bold" color="#000000" text="2015 I20"></Label>
+                                <Label fontSize="12" class="font-weight-normal" color="#000000" text="Akkayyapalem"></Label>
+                                <Label fontSize="10" class="font-weight-bold" color="#729acb" text="2,00,000"></Label>
+                            </StackLayout>
+                            <StackLayout margin="10" class="nearby" padding="10">
+                                <StackLayout class="album-image" height="110" width="125" backgroundImage="~/images/carshift.jpg"
+                                    borderRadius="5">
+                                </StackLayout>
+                                <Label fontSize="14" class="font-weight-bold" color="#000000" text="2000 Alto"></Label>
+                                <Label fontSize="12" class="font-weight-normal" color="#000000" text="Akkayyapalem"></Label>
+                                <Label fontSize="10" class="font-weight-bold" color="#729acb" text="50,000"></Label>
+                            </StackLayout>
+
+                            <StackLayout margin="10" class="nearby" padding="10">
+                                <StackLayout class="album-image" height="110" width="125" backgroundImage="~/images/bike.jpg"
+                                    borderRadius="5">
+                                </StackLayout>
+                                <Label fontSize="14" class="font-weight-bold" color="#000000" text="2010 Hero Passion"></Label>
+                                <Label fontSize="12" class="font-weight-normal" color="#000000" text="T C Palem"></Label>
+                                <Label fontSize="10" class="font-weight-bold" color="#729acb" text="10,000"></Label>
+                            </StackLayout>
+                        </StackLayout>
+                    </ScrollView>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+        <StackLayout marginBottom="10" col="0" row="2" class="childelementborder">
+
+
+            <StackLayout paddingTop="10">
+                <GridLayout class="stackheaderunderline" columns="auto,*,auto" rows="auto">
+                    <Label col="0" row="0" class="" paddingLeft="10" fontSize="20" color="#000000" text="All categories"></Label>
+                </GridLayout>
+
+
+
+
+                <Accordion height="250" [items]="items" allowMultiple="false" [selectedIndexes]="selectedIndexes">
+
+                 
+                    <ng-template let-i="index" let-item="item" acTemplateKey="title">
+                        <GridLayout columns="auto,*" rows="auto" backgroundColor="white">
+                            <Label col="0"  row="0" class="title p-10" height="100%" [text]="item.title"></Label>
+                            <!-- <Label col="1"  row="0"  text="&#xf015;" class="nt-icon fas labelicon p-10"></Label> -->
+                        </GridLayout>
+                    </ng-template>
+
+                    <ng-template let-i="index" let-item="item" acTemplateKey="content">
+                        <StackLayout class="p-l-10 p-5">
+                            <Label [text]="item.text"></Label>
+                        </StackLayout>
+                    </ng-template>
+ 
+                </Accordion>
+            </StackLayout>
+        </StackLayout>
+        <StackLayout marginBottom="10" col="0" row="3" class="childelementborder">
+
+
+                <ScrollView orientation="vertical">
+                    <StackLayout paddingTop="10">
+                        <GridLayout class="stackheaderunderline"  columns="auto,*,auto" rows="auto">
+                            <Label col="0" row="0" class="" paddingLeft="10" fontSize="20" color="#000000"
+                                text="Your Last Visited Ads"></Label>
+                            <Label col="2" row="0" class="" marginRight="20" fontSize="14" color="#8d8d8d"
+                                text="More"></Label>
+                        </GridLayout>
+    
+    
+                        <ScrollView orientation="horizontal">
+                            <StackLayout orientation="horizontal">
+                                <StackLayout margin="10" class="nearby" padding="10">
+                                    <StackLayout class="album-image" height="110" width="125" backgroundImage="~/images/carshift.jpg"
+                                        borderRadius="5">
+                                    </StackLayout>
+                                    <Label fontSize="14" class="font-weight-bold" color="#000000" text="2014 Shift"></Label>
+                                    <Label fontSize="12" class="font-weight-normal" color="#000000" text="Akkayyapalem"></Label>
+                                    <Label fontSize="10" class="font-weight-bold" color="#729acb" text="2,50,000"></Label>
+                                </StackLayout>
+    
+                                <StackLayout margin="10" class="nearby" padding="10">
+                                    <StackLayout class="album-image" height="110" width="125" backgroundImage="~/images/i20car.jpg"
+                                        borderRadius="5">
+                                    </StackLayout>
+                                    <Label fontSize="14" class="font-weight-bold" color="#000000" text="2015 I20"></Label>
+                                    <Label fontSize="12" class="font-weight-normal" color="#000000" text="Akkayyapalem"></Label>
+                                    <Label fontSize="10" class="font-weight-bold" color="#729acb" text="2,00,000"></Label>
+                                </StackLayout>
+                               
+                            </StackLayout>
+                        </ScrollView>
+                    </StackLayout>
+                </ScrollView>
+            </StackLayout>
+    </GridLayout>
+    <!-- <StackLayout>
         <StackLayout class="deatilsbody">
                 <Label text="Summary" class="header"></Label>
             <GridLayout columns="75,auto,*" class="detailslist">
                 <Label col="0" textWrap="true" text="Name" class=""></Label>
                 <Label col="1" textWrap="true" text=":-" class=""></Label>
-                <Label col="2" textWrap="true" text="Jack manaaa" class="p-l-15"></Label>
+                <Label col="2" textWrap="true" text="Jack mana" class="p-l-15"></Label>
             </GridLayout>
 
             <GridLayout columns="75,auto,*" class="detailslist">
@@ -48,5 +179,5 @@
                 </GridLayout>
 
         </StackLayout>
-    </StackLayout>
+    </StackLayout> -->
 </ScrollView>
