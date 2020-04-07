@@ -25,8 +25,8 @@ interface Source {
  
 @Component({
     selector: "Deatils",
-    templateUrl: "./Deatils.component.html",
-    styleUrls: ["./Deatils.component.scss"]
+    templateUrl: "./deatils.component.html",
+    styleUrls: ["./deatils.component.scss"]
 })
 export class DeatilsComponent implements OnInit {
     searching = false;

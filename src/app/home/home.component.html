@@ -22,7 +22,7 @@
         
 </ActionBar> 
 <ScrollView class="parentelement" orientation="vertical">
-    <GridLayout orientation="vertical" columns="*" rows="auto,auto,auto,auto,auto">
+    <GridLayout orientation="vertical" columns="*" rows="auto,auto,auto,auto,auto,auto">
         <FlexboxLayout marginBottom="10" col="0" row="0" flexWrap="wrap" width="100%" class="childelementborder">
             <StackLayout  class="stacklayoutcss" width="100%" stretch="aspectFill" orientation="vertical">
                 <Label marginTop="10" textAlignment="center" row="0" class="fontstyle" paddingLeft="10" fontSize="20" color="#000000"
@@ -31,7 +31,7 @@
                     text="Here are few things you might be intrested in"></Label>
             </StackLayout>
 
-            <StackLayout class="stacklayoutcss" [height]="photoHeight" [width]="photoWidth"
+            <StackLayout (tap)="onNavItemTap('/categories')" class="stacklayoutcss" [height]="photoHeight" [width]="photoWidth"
                 stretch="aspectFill" orientation="vertical">
                 <Label col="0" text="&#xf015;" class="nt-icon fas labelicon"></Label>
                 <Label col="1" text="Properties" class="p-r-10 labelfont"></Label>
@@ -44,7 +44,7 @@
             <StackLayout class="stacklayoutcss" [height]="photoHeight" [width]="photoWidth"
                 stretch="aspectFill" orientation="vertical">
                 <Label col="0" text="&#xf5e4;" class="nt-icon fas labelicon"></Label>
-                <Label col="1" text="cars" class="p-r-10 labelfont"></Label>
+                <Label col="1" text="Cars" class="p-r-10 labelfont"></Label>
             </StackLayout>
             <StackLayout class="stacklayoutcss" [height]="photoHeight" [width]="photoWidth"
                 stretch="aspectFill" orientation="vertical">
@@ -190,12 +190,20 @@
                 </StackLayout>
             </ScrollView>
         </StackLayout>
-
+        <!-- <StackLayout  col="0" row="4" > 
+            <Button text="Get My Location" (tap)="getLocation()" class="btn btn-primary"></Button>
+    
+            <Label text="{{ 'Latitude: ' + lat }}" class="lbl"></Label>
+            <Label text="{{ 'Longitude: ' + lon }}" class="lbl"></Label>
+            <Label text="{{ 'Speed: ' + speed }}" class="lbl"></Label>
+     
+            <Label text="{{ 'Address: ' + addr }}" class="lbl" textWrap="true"></Label>
+        </StackLayout> -->
     </GridLayout>
 
 </ScrollView>
-<FlexboxLayout verticalAlignment="bottom" justifyContent="flex-end" height="10%" width="100%" id="addButtonContainer"
+<FlexboxLayout (tap)="onNavItemTap('/postad')" verticalAlignment="bottom" justifyContent="flex-end" height="10%" width="100%" id="addButtonContainer"
 left="0" marginBottom="10">
-<Button class="add-button" row="0" col="1" text="Post Ad" (tap)="navigateAdd()"></Button>
+<Button class="add-button" row="0" col="1" text="Post Ad"></Button>
 </FlexboxLayout> 
  

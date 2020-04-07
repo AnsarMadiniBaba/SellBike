@@ -9,7 +9,7 @@
                 <GridLayout class="p-0 m-0" columns="*,auto,auto" rows="auto"> 
                         <Button col="1" row="0"  class="-outline" text="Short" textWrap="true"></Button>
                      
-                        <Button col="2" row="0"  class="-outline" text="Filter" textWrap="true"></Button>
+                        <Button (tap)="onNavItemTap('/filter')" col="2" row="0"  class="-outline" text="Filter" textWrap="true"></Button>
                     </GridLayout>
         </StackLayout>
     <RadListView id="list-view" [items]="news" separatorColor="transparent" height="100%">

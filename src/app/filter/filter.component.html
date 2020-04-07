@@ -1,0 +1,93 @@
+<ActionBar flat="true" backgroundColor="#FFFFFF" color="#000000">
+</ActionBar>
+
+<StackLayout class="parentelement" orientation="vertical">
+    <StackLayout class="childelementborder">
+        <StackLayout class="filterpagepadding times">
+            <GridLayout columns="auto,*,auto,auto" rows="auto">
+
+                <Label (tap)="onNavBtnTap()"  marginLeft="20" marginTop="10" width="25" color="#2874f0" fontSize="25" col="0" row="0"
+                    text="&#xf00d;" class="nt-icon fas labelicon"></Label>
+                <Label marginRight="17" marginTop="10" color="#FFFFFF" fontSize="22" col="3" row="0" text="Clear All"
+                    class="font-weight-bold" fontSize="18" color="#2874f0"></Label>
+            </GridLayout>
+        </StackLayout>
+
+        <GridLayout paddingTop="10" paddingBottom="10" columns="*" rows="auto,auto">
+            <Label col="0" row="0" class="font-weight-bold header" text="Brand"></Label>
+            <GridLayout  col="0" row="1" orientation="horizontal" class="list-group-item brandclass" rows="auto,auto" columns="auto,auto,*,auto">
+                <Label col="1" row="0" text="View all" fontSize="17" ></Label>
+                <Label col="3" row="0" horizontalAlignment="right" color="#b9b9b9" paddingRight="2" class="fas nt-icon"
+                    text="&#xf061;"></Label>
+                <StackLayout colSpan="4" col="0" row="2" height="1" backgroundColor="#EEEEEE"></StackLayout>
+            </GridLayout>   
+        </GridLayout>
+        <GridLayout columns="*" rows="auto,auto,auto">
+            <Label col="0" row="0" class="font-weight-bold header" text="Price "></Label>
+            <GridLayout col="0" row="1" columns="*,*" rows="auto">
+                <TextField class="login-input-field" col="0" row="0" keyboardType="number" autocorrect="false"
+                    autocapitalizationType="none" returnKeyType="next" [text]="bikefilter.MinPrice"
+                    (returnPress)="onReturnPress($event)">
+                </TextField>
+                <TextField class="login-input-field" col="1" row="0" keyboardType="number" autocorrect="false"
+                    autocapitalizationType="none" returnKeyType="next" [text]="bikefilter.MaxPrice"
+                    (returnPress)="onReturnPress($event)">
+                </TextField>
+            </GridLayout>
+            <StackLayout class="slider" colSpan="2" col="0" row="2">
+                <RangeSeekBar [minValue]="rangeSeekBarProp.minValue" [maxValue]="rangeSeekBarProp.maxValue"
+                    [minStartValue]="rangeSeekBarProp.minStartValue" [maxStartValue]="rangeSeekBarProp.maxStartValue"
+                    [minRange]="rangeSeekBarProp.minRange" [step]="rangeSeekBarProp.step"
+                    (rangeSeekBarChanged)="rangeSeekBarChanged($event)"
+                    (rangeSeekBarFinalValue)="rangeSeekBarFinalValue($event)" class="range-seek-bar"></RangeSeekBar>
+            </StackLayout>
+        </GridLayout>
+        <GridLayout columns="*" rows="auto,auto,auto">
+            <Label col="0" row="0" class="font-weight-bold header" text="Year"></Label>
+            <GridLayout col="0" row="1" columns="*,*" rows="auto">
+                <TextField class="login-input-field" col="0" row="0" keyboardType="number" autocorrect="false"
+                    autocapitalizationType="none" returnKeyType="next" [text]="bikefilter.MinYear"
+                    (returnPress)="onReturnPress($event)">
+                </TextField>
+                <TextField class="login-input-field" col="1" row="0" keyboardType="number" autocorrect="false"
+                    autocapitalizationType="none" returnKeyType="next" [text]="bikefilter.MaxYear"
+                    (returnPress)="onReturnPress($event)">
+                </TextField>
+            </GridLayout>
+            <StackLayout class="slider" colSpan="2" col="0" row="2">
+                <RangeSeekBar [minValue]="rangeSeekBarPropYear.minValue" [maxValue]="rangeSeekBarPropYear.maxValue"
+                    [minStartValue]="rangeSeekBarPropYear.minStartValue"
+                    [maxStartValue]="rangeSeekBarPropYear.maxStartValue" [minRange]="rangeSeekBarPropYear.minRange"
+                    [step]="rangeSeekBarPropYear.step" (rangeSeekBarChanged)="rangeSeekBarChangedYear($event)"
+                    (rangeSeekBarFinalValue)="rangeSeekBarFinalValueYear($event)" class="range-seek-bar"></RangeSeekBar>
+            </StackLayout>
+        </GridLayout>
+        <GridLayout columns="*" rows="auto,auto,auto">
+            <Label col="0" row="0" class="font-weight-bold header" text="KM Driven"></Label>
+            <GridLayout col="0" row="1" columns="*,*" rows="auto">
+                <TextField class="login-input-field" col="0" row="0" keyboardType="number" autocorrect="false"
+                    autocapitalizationType="none" returnKeyType="next" [text]="bikefilter.MinKmdriven"
+                    (returnPress)="onReturnPress($event)">
+                </TextField>
+                <TextField class="login-input-field" col="1" row="0" keyboardType="number" autocorrect="false"
+                    autocapitalizationType="none" returnKeyType="next" [text]="bikefilter.MaxKmdriven"
+                    (returnPress)="onReturnPress($event)">
+                </TextField>
+            </GridLayout>
+            <StackLayout class="slider" colSpan="2" col="0" row="2">
+                <RangeSeekBar [minValue]="rangeSeekBarPropKmdriven.minValue"
+                    [maxValue]="rangeSeekBarPropKmdriven.maxValue"
+                    [minStartValue]="rangeSeekBarPropKmdriven.minStartValue"
+                    [maxStartValue]="rangeSeekBarPropKmdriven.maxStartValue"
+                    [minRange]="rangeSeekBarPropKmdriven.minRange" [step]="rangeSeekBarPropKmdriven.step"
+                    (rangeSeekBarChanged)="rangeSeekBarChangedKmDriven($event)"
+                    (rangeSeekBarFinalValue)="rangeSeekBarFinalValueKmDriven($event)" class="range-seek-bar">
+                </RangeSeekBar>
+            </StackLayout>
+        </GridLayout>
+    </StackLayout>
+</StackLayout>
+<FlexboxLayout verticalAlignment="bottom" justifyContent="center" height="10%" 
+marginBottom="10">
+<Button class="btn" fontWeight="600" backgroundColor="#2874f0" color="#FFFFFF" fontSize="17" text="APPLY" width="100%" (tap)="navigateAdd()"></Button>
+</FlexboxLayout> 
