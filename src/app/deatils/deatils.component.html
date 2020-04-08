@@ -2,43 +2,46 @@
 </ActionBar>
 
 <ScrollView class="parentelement" orientation="vertical">
-      
-    <GridLayout orientation="vertical" marginTop="28" id="detail-page-background" columns="*" rows="auto,auto,auto,auto,auto">
-        <RadListView col="0" row="0" width="100%" id="list-views" [items]="source" height="200">
+
+    <GridLayout orientation="vertical" marginTop="28" id="detail-page-background" columns="*"
+        rows="auto,auto,auto,auto,auto">
+        <RadListView col="0" row="0" width="100%" id="list-views" [items]="images" height="200">
             <ListViewLinearLayout tkListViewLayout scrollDirection="Horizontal"></ListViewLinearLayout>
             <ng-template tkListItemTemplate let-item="item">
                 <StackLayout class="m-0 p-0" orientation="horizontal">
-                    <Image src="{{ item.name }}" stretch="aspectFill" height="200" width="15%"></Image>
+                    <Image src="{{ '~/images/'+item }}" stretch="aspectFill" height="200" width="15%"></Image>
 
                 </StackLayout>
             </ng-template>
         </RadListView>
         <StackLayout verticalAlignment="top">
             <GridLayout columns="auto,*,auto,auto" rows="auto">
-                <Image class="-primary" col="0" row="0" marginLeft="20" marginTop="10" height="20" width="25" (tap)="onNavBtnTap()"
-                    src="~/images/shape5@3x.png"></Image>
-                <Label marginRight="17" marginTop="10" width="25" color="#FFFFFF" fontSize="22" col="2" row="0" text="&#xf1e0;"
-                    class="nt-icon fas labelicon"></Label>
-                <Label marginRight="17" marginTop="10" width="30" color="#FFFFFF" fontSize="22" col="3" row="0" text="&#xf004;"
-                    class="nt-icon fas labelicon"></Label>
+                <Image class="-primary" col="0" row="0" marginLeft="20" marginTop="10" height="20" width="25"
+                    (tap)="onNavBtnTap()" src="~/images/shape5@3x.png"></Image>
+                <Label marginRight="17" marginTop="10" width="25" color="#FFFFFF" fontSize="22" col="2" row="0"
+                    text="&#xf1e0;" class="nt-icon fas labelicon"></Label>
+                <Label (tap)="onHeartTap()"  *ngIf="!heart" marginRight="17" marginTop="10" width="30" color="#FFFFFF" fontSize="22" col="3" row="0"
+                    text="&#xf004;" class="nt-icon fas labelicon"></Label>
+                <Label (tap)="onHeartTap()"  *ngIf="heart"  marginRight="17" marginTop="10" width="30" color="#eb4034" fontSize="22" col="3" row="0"
+                    text="&#xf004;" class="nt-icon fas labelicon"></Label>
             </GridLayout>
         </StackLayout>
         <StackLayout marginBottom="7" class="p-10 childelementborder" col="0" row="1" backgroundColor="White">
-            <Label class="cost   p-0 m-0" text="Rs 100000" textWrap="true"></Label>
-            <Label class="title p-0 m-0" text="Hundai i20" textWrap="true"></Label>
-            <Label class="title   p-0 m-0" text="2012-40000km" textWrap="true"></Label>
+            <Label class="cost   p-0 m-0" text="{{'Rs '+bike.price}}" textWrap="true"></Label>
+            <Label class="title p-0 m-0" text="{{bike.brand +' - '+ bike.model}}" textWrap="true"></Label>
+            <!-- <Label class="title   p-0 m-0" text="2012-40000km" textWrap="true"></Label> -->
             <GridLayout class="p-0 m-0" columns="*,auto" rows="auto">
                 <!-- <Label col="0" row="0" text="&#xf3c5;" class="nt-icon labelicon fas pull-left"></Label> -->
-                <Label class="location   p-0 m-0" col="0" row="0" text="Maripalam, vizag" textWrap="true"></Label>
-                <Label class="postdate   p-0 m-0" col="1" row="0" text="Today" textWrap="true"></Label>
+                <Label class="location   p-0 m-0" col="0" row="0" text="{{ bike.landmark +', '+ bike.city }}"
+                    textWrap="true"></Label>
+                <Label class="postdate   p-0 m-0" col="1" row="0" text="{{ bike.dateposted }}" textWrap="true"></Label>
                 <!-- <Button col="1" row="0"  class="btn-sm pull-right -primary -rounded-sm" text="Buy Now" textWrap="true"></Button> -->
             </GridLayout>
         </StackLayout>
-        <StackLayout marginBottom="7" height="240" class="p-l-10 p-r-10 childelementborder" col="0" row="2"
-            backgroundColor="White">
+        <StackLayout marginBottom="7" class="p-l-10 p-r-10 childelementborder" col="0" row="2" backgroundColor="White">
             <Label class="font-weight-bold" marginTop="10" fontSize="20" color="#333333" text="Details"></Label>
 
-            <ListView class="list-group" [items]="listViewData">
+            <ListView height="180" class="list-group" [items]="listViewData">
                 <ng-template let-item="item">
                     <GridLayout orientation="horizontal" class="list-group-item p-2 m-2" rows="auto" columns="*,auto">
 
@@ -52,11 +55,11 @@
 
 
         </StackLayout>
-        <StackLayout marginBottom="7" height="240" class="p-l-10 p-r-10 childelementborder" col="0" row="3"
-            backgroundColor="White">
-            <Label class="font-weight-bold" marginTop="10" fontSize="20" color="#333333" text="More Spcifications"></Label>
+        <StackLayout marginBottom="7" class="p-l-10 p-r-10 childelementborder" col="0" row="3" backgroundColor="White">
+            <Label class="font-weight-bold" marginTop="10" fontSize="20" color="#333333"
+                text="More Spcifications"></Label>
 
-            <ListView class="list-group" [items]="otherSpecs">
+            <ListView height="75" class="list-group" [items]="otherSpecs">
                 <ng-template let-item="item">
                     <GridLayout orientation="horizontal" class="list-group-item p-2 m-2" rows="auto" columns="*,auto">
 
@@ -72,54 +75,62 @@
             <ScrollView orientation="vertical">
                 <StackLayout paddingTop="10">
                     <GridLayout class="stackheaderunderline" columns="auto,*,auto" rows="auto">
-                        <Label col="0" row="0" class="" paddingLeft="10" fontSize="20" color="#000000" text="Related Ads"></Label>
-                        <Label col="2" row="0" class="" marginRight="20" fontSize="14" color="#8d8d8d" text="More"></Label>
+                        <Label col="0" row="0" class="" paddingLeft="10" fontSize="20" color="#000000"
+                            text="Related Ads"></Label>
+                        <Label col="2" row="0" class="" marginRight="20" fontSize="14" color="#8d8d8d"
+                            text="More"></Label>
                     </GridLayout>
                     <ScrollView orientation="horizontal">
                         <StackLayout orientation="horizontal">
                             <StackLayout margin="10" class="nearby" padding="10">
-                                <StackLayout class="album-image" height="110" width="125" backgroundImage="~/images/carshift.jpg"
-                                    borderRadius="5">
+                                <StackLayout class="album-image" height="110" width="125"
+                                    backgroundImage="~/images/carshift.jpg" borderRadius="5">
                                 </StackLayout>
                                 <Label fontSize="14" class="font-weight-bold" color="#000000" text="2014 Shift"></Label>
-                                <Label fontSize="12" class="font-weight-normal" color="#000000" text="Akkayyapalem"></Label>
+                                <Label fontSize="12" class="font-weight-normal" color="#000000"
+                                    text="Akkayyapalem"></Label>
                                 <Label fontSize="10" class="font-weight-bold" color="#729acb" text="2,50,000"></Label>
                             </StackLayout>
 
                             <StackLayout margin="10" class="nearby" padding="10">
-                                <StackLayout class="album-image" height="110" width="125" backgroundImage="~/images/i20car.jpg"
-                                    borderRadius="5">
+                                <StackLayout class="album-image" height="110" width="125"
+                                    backgroundImage="~/images/i20car.jpg" borderRadius="5">
                                 </StackLayout>
                                 <Label fontSize="14" class="font-weight-bold" color="#000000" text="2015 I20"></Label>
-                                <Label fontSize="12" class="font-weight-normal" color="#000000" text="Akkayyapalem"></Label>
+                                <Label fontSize="12" class="font-weight-normal" color="#000000"
+                                    text="Akkayyapalem"></Label>
                                 <Label fontSize="10" class="font-weight-bold" color="#729acb" text="2,00,000"></Label>
                             </StackLayout>
                             <StackLayout margin="10" class="nearby" padding="10">
-                                <StackLayout class="album-image" height="110" width="125" backgroundImage="~/images/carshift.jpg"
-                                    borderRadius="5">
+                                <StackLayout class="album-image" height="110" width="125"
+                                    backgroundImage="~/images/carshift.jpg" borderRadius="5">
                                 </StackLayout>
                                 <Label fontSize="14" class="font-weight-bold" color="#000000" text="2000 Alto"></Label>
-                                <Label fontSize="12" class="font-weight-normal" color="#000000" text="Akkayyapalem"></Label>
+                                <Label fontSize="12" class="font-weight-normal" color="#000000"
+                                    text="Akkayyapalem"></Label>
                                 <Label fontSize="10" class="font-weight-bold" color="#729acb" text="50,000"></Label>
                             </StackLayout>
 
                             <StackLayout margin="10" class="nearby" padding="10">
-                                <StackLayout class="album-image" height="110" width="125" backgroundImage="~/images/bike.jpg"
-                                    borderRadius="5">
+                                <StackLayout class="album-image" height="110" width="125"
+                                    backgroundImage="~/images/bike.jpg" borderRadius="5">
                                 </StackLayout>
-                                <Label fontSize="14" class="font-weight-bold" color="#000000" text="2010 Hero Passion"></Label>
-                                <Label fontSize="12" class="font-weight-normal" color="#000000" text="T C Palem"></Label>
+                                <Label fontSize="14" class="font-weight-bold" color="#000000"
+                                    text="2010 Hero Passion"></Label>
+                                <Label fontSize="12" class="font-weight-normal" color="#000000"
+                                    text="T C Palem"></Label>
                                 <Label fontSize="10" class="font-weight-bold" color="#729acb" text="10,000"></Label>
                             </StackLayout>
                         </StackLayout>
                     </ScrollView>
                 </StackLayout>
             </ScrollView>
-        </StackLayout> 
-    </GridLayout> 
+        </StackLayout>
+    </GridLayout>
 </ScrollView>
-<FlexboxLayout verticalAlignment="bottom" justifyContent="center" height="10%" 
-marginBottom="10">
-<Button class="btn" fontWeight="600" backgroundColor="#2874f0" color="#FFFFFF" fontSize="17" text="CHAT" width="100%" (tap)="navigateAdd()"></Button>
-<Button class="btn" fontWeight="600" backgroundColor="#2874f0" color="#FFFFFF" fontSize="17" text="CALL" width="100%" (tap)="navigateAdd()"></Button>
-</FlexboxLayout> 
+<FlexboxLayout verticalAlignment="bottom" justifyContent="center" height="10%" marginBottom="10">
+    <!-- <Button class="btn" fontWeight="600" backgroundColor="#2874f0" color="#FFFFFF" fontSize="17" text="CHAT"
+        width="100%" (tap)="navigateAdd()"></Button> -->
+    <Button class="btn" fontWeight="600" backgroundColor="#2874f0" color="#FFFFFF" fontSize="17" text="CALL"
+        width="100%" (tap)="callToAdvertiser()"></Button>
+</FlexboxLayout>

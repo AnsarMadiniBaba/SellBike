@@ -1,31 +1,42 @@
 import { Component, OnInit } from "@angular/core";
 import { RadSideDrawer } from "nativescript-ui-sidedrawer";
-import * as app from "tns-core-modules/application";
-import { screen } from "tns-core-modules/platform";
-import { Page } from "tns-core-modules/ui/page";
+import * as app from "tns-core-modules/application";  
 import { RouterExtensions } from "nativescript-angular/router";
-// import {  screXen } from "./../images/";
 import * as geolocation from "nativescript-geolocation";
-// import { Accuracy } from "ui/enums";
 import * as camera from "nativescript-camera";
 import { requestPermissions } from "nativescript-camera";
-import { Image } from "tns-core-modules/ui/image";
+import { BikeDetails } from "../models/bikedetails.model";
+import { HttpClient, HttpHeaders } from "@angular/common/http"; 
+import { ListViewEventData, RadListView } from "nativescript-ui-listview"
+import { NavigationExtras } from "@angular/router";
+import { AppSettings, Constant } from "../app.constants";
+
+ 
 
 @Component({
     selector: "Home",
     templateUrl: "./home.component.html",
     styleUrls: ["./home.component.scss"],
 })
-export class HomeComponent implements OnInit {
-    photoWidth: number = screen.mainScreen.widthDIPs * 0.25;
-    photoHeight: number = this.photoWidth;
-    lat = 0;
-    lon = 0;
-    speed = 0;
-    addr = "";
-    constructor(private page: Page, private routerExtensions: RouterExtensions) {
-        // Use the component constructor to inject providers.
+export class HomeComponent implements OnInit { 
+    bikedetails: BikeDetails[];
+    constructor(private routerExtensions: RouterExtensions,private http: HttpClient) {
+        this.http.get<BikeDetails[]>(AppSettings.API_ENDPOINT + Constant.GetAllBikes).subscribe((result) => {
+            this.bikedetails = result; 
+        }, (error) => {
+            console.log(error);
+        });
         
+    }
+
+    public onItemSelected(args: ListViewEventData) {
+        this.routerExtensions.navigate(["/deatils"]);
+        const listview = args.object as RadListView;
+        const selectedItems = listview.getSelectedItems() as Array<BikeDetails>;
+        let routeExtras:NavigationExtras={
+            queryParams:{"bike":JSON.stringify(selectedItems)}
+        }
+        this.routerExtensions.navigate(["/deatils"],routeExtras);  
     }
 
     ngOnInit(): void {
@@ -36,10 +47,7 @@ export class HomeComponent implements OnInit {
     onDrawerButtonTap(): void {
         const sideDrawer = <RadSideDrawer>app.getRootView();
         sideDrawer.showDrawer();
-    }
-    redirecttocatpage() {
-        this.routerExtensions.navigate(["/browse"]);
-    }
+    } 
     onNavItemTap(navItemRoute: string): void {
         this.routerExtensions.navigate([navItemRoute], {
             transition: {

@@ -5,22 +5,8 @@ import { SearchBar } from "tns-core-modules/ui/search-bar";
 import { RouterExtensions } from "nativescript-angular/router";
 import { ObservableArray } from "tns-core-modules/data/observable-array";
 import { Page } from "tns-core-modules/ui/page";
-
-interface DataItem {
-    source: Source[];
-    author: string;
-    title: string;
-    cost: string;
-    description: string;
-    url: string;
-    urlToImage: string;
-    publishedAt: string;
-}
-
-interface Source {
-    id: string;
-    name: string;
-}
+import { ActivatedRoute } from "@angular/router";
+import { BikeDetails } from "../models/bikedetails.model"; 
 
  
 @Component({
@@ -29,92 +15,73 @@ interface Source {
     styleUrls: ["./deatils.component.scss"]
 })
 export class DeatilsComponent implements OnInit {
-    searching = false;
-    source: Source[];
-    allNews : DataItem[];
-    
-   
+    heart = false;
+    bike:BikeDetails;
+    images:any;
+    listViewData:any;
+    otherSpecs:any;
 
-    
- 
-    constructor(private page: Page,private routerExtensions: RouterExtensions) {
-        page.actionBarHidden = true;
-       
-        this.source = [{
-            "id": null,
-            "name": "~/images/bmw.jpg"
-          },{
-            "id": null,
-            "name": "~/images/bmw.jpg"
-          },{
-            "id": null,
-            "name": "~/images/bmw.jpg"
-          }];
-          this.allNews = [
-            {
-              "source": [{
-                "id": null,
-                "name": "~/images/bmw.jpg"
-              },{
-                "id": null,
-                "name": "~/images/bmw.jpg"
-              },{
-                "id": null,
-                "name": "~/images/bmw.jpg"
-              }],
-              "author": null,
-              "title": "In Good Condition",
-              "cost":"1400",
-              "description": null,
-              "url": "https://www.yahoo.com/news/latest-turkey-urges-sides-avoid-more-syria-turmoil-113652213.html",
-              "urlToImage": null,
-              "publishedAt": "2018-04-13T19:44:00Z"
-            }]
+    getHeartStatus(){
+    //pending to get the user faverate bikes sql lite
     }
-    listViewData = [
-        { 
-            deatils: "Brand",
-            value: "Hyundai"
-        },
-        {
-            deatils: "Model",
-            value: "Elite i20"
-        },
-        {
-            deatils: "Year",
-            value: "2016"
-        },
-        {
-            deatils: "Fuel",
-            value: "Petrol"
-        },
-        {
-            deatils: "KM Driven",
-            value: "100,000km"
-        } 
-    ];
-    otherSpecs = [
-        { 
-            deatils: "Color",
-            value: "red"
-        },
-        {
-            deatils: "Car Type",
-            value: "Hatchback"
-        },
-        {
-            deatils: "Registration Place",
-            value: "AP"
-        },
-        {
-            deatils: "Condtion",
-            value: "Used"
-        },
-        {
-            deatils: "Engine Capacity(Cc)",
-            value: "1398.0"
-        } 
-    ]
+    onHeartTap(){
+        this.heart = !this.heart;
+        //insert a record of user fav
+    }
+    constructor(private page: Page,private routerExtensions: RouterExtensions,private route:ActivatedRoute) {
+        page.actionBarHidden = true;
+        this.route.queryParams.subscribe(params=>{
+            this.bike=JSON.parse(params["bike"])[0];
+            console.log(this.bike);
+        })
+        this.getHeartStatus();
+        this.images = this.bike.images; 
+        this.listViewData = [
+            { 
+                deatils: "Brand",
+                value: this.bike.brand
+            },
+            {
+                deatils: "Model",
+                value: this.bike.model
+            },
+            {
+                deatils: "Year",
+                value: this.bike.year
+            },
+            {
+                deatils: "Fuel",
+                value: "Petrol"
+            },
+            {
+                deatils: "KM Driven",
+                value: this.bike.kmdriven
+            } 
+        ];
+        this.otherSpecs = [
+            // { 
+            //     deatils: "Color",
+            //     value: "red"
+            // },
+            // {
+            //     deatils: "Car Type",
+            //     value: "Hatchback"
+            // },
+            // {
+            //     deatils: "Registration Place",
+            //     value: "AP"
+            // },
+            {
+                deatils: "Owners",
+                value: this.bike.owners
+            },
+            {
+                deatils: "Engine Capacity(Cc)",
+                value: this.bike.enginecap
+            } 
+        ]
+    }
+   
 
     ngOnInit(): void {
         // Init your component properties here.
@@ -123,5 +90,11 @@ export class DeatilsComponent implements OnInit {
      
     onNavBtnTap(){
         this.routerExtensions.back();
+    }
+
+    callToAdvertiser(){
+        //check if user loged in
+        //if not logged popup to give deatils
+        // else how the contact number
     }
 }

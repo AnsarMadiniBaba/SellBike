@@ -17,7 +17,19 @@
     border-color: #e2e6ec;
     // border-bottom-s
 }
+.cost{
+    font-weight:600;
+    font-size:16px;
+    color: #2874f0;
+}
 
+.title{
+    font-size:13px 
+}
+
+.location .postdate{
+    font-size:13px 
+}
 
 
 .nearby{
@@ -37,4 +49,10 @@
     color: #fff;
     margin-right: 15;
     font-weight: 600;
+}
+
+.bikepanal{
+    background:rgb(160, 63, 63);
+    border-width: 5px;
+    border-color: #e2e6ec;
 }
