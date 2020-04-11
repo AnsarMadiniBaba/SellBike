@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewContainerRef } from "@angular/core";
 import { RadSideDrawer } from "nativescript-ui-sidedrawer";
 import * as app from "tns-core-modules/application";
 import { SearchBar } from "tns-core-modules/ui/search-bar";
@@ -7,6 +7,8 @@ import { ObservableArray } from "tns-core-modules/data/observable-array";
 import { Page } from "tns-core-modules/ui/page";
 import { ActivatedRoute } from "@angular/router";
 import { BikeDetails } from "../models/bikedetails.model"; 
+import { ModalDialogService, ModalDialogOptions } from "nativescript-angular/modal-dialog";
+import { ModalViewComponent } from "./modal-view";
 
  
 @Component({
@@ -28,7 +30,8 @@ export class DeatilsComponent implements OnInit {
         this.heart = !this.heart;
         //insert a record of user fav
     }
-    constructor(private page: Page,private routerExtensions: RouterExtensions,private route:ActivatedRoute) {
+    constructor(private page: Page,private routerExtensions: RouterExtensions,private route:ActivatedRoute,
+         private modalService: ModalDialogService, private vcRef: ViewContainerRef) {
         page.actionBarHidden = true;
         this.route.queryParams.subscribe(params=>{
             this.bike=JSON.parse(params["bike"])[0];
@@ -81,7 +84,34 @@ export class DeatilsComponent implements OnInit {
             } 
         ]
     }
-   
+    public startDate: Date;
+    getStartDate() {
+        this.createModelView().then(result => {
+            if (this.validate(result)) {
+                this.startDate = result;
+            }
+        }).catch(error => this.handleError(error));
+    }
+    private validate(result: any) {
+        return !!result;
+    }
+
+    private handleError(error: any) {
+        alert("Please try again!");
+        console.dir(error);
+    }
+    
+    private createModelView(): Promise<any> {
+        const today = new Date();
+        const options: ModalDialogOptions = {
+            viewContainerRef: this.vcRef,
+            context: today.toDateString(),
+            fullscreen: false
+        };
+
+        // showModal returns a promise with the received parameters from the modal page
+        return this.modalService.showModal(ModalViewComponent, options);
+    }
 
     ngOnInit(): void {
         // Init your component properties here.

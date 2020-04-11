@@ -13,6 +13,13 @@ export class User extends BaseUser {
         super();
     }
 }
+export class UserBasicDeatils  {
+    public email: string = "";
+    public phoneNumber: string = "";
+    public name: string = "";
+    constructor() {
+    }
+}
 
 export class RegisteringUser extends BaseUser {
     public password2: string = "";

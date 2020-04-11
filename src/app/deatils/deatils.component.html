@@ -4,7 +4,7 @@
 <ScrollView class="parentelement" orientation="vertical">
 
     <GridLayout orientation="vertical" marginTop="28" id="detail-page-background" columns="*"
-        rows="auto,auto,auto,auto,auto">
+        rows="auto,auto,auto,auto,auto,auto">
         <RadListView col="0" row="0" width="100%" id="list-views" [items]="images" height="200">
             <ListViewLinearLayout tkListViewLayout scrollDirection="Horizontal"></ListViewLinearLayout>
             <ng-template tkListItemTemplate let-item="item">
@@ -126,6 +126,10 @@
                 </StackLayout>
             </ScrollView>
         </StackLayout>
+        <StackLayout marginBottom="70" col="0" row="5" class="childelementborder">
+        <Label [text]='startDate | date:"MM/dd/yy"' class="m-15" textWrap="true"></Label>  
+        <Button class="btn btn-primary btn-active" text="Enter Start Date" (tap)="getStartDate()"></Button></StackLayout>
+
     </GridLayout>
 </ScrollView>
 <FlexboxLayout verticalAlignment="bottom" justifyContent="center" height="10%" marginBottom="10">

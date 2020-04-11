@@ -4,18 +4,23 @@ import { NativeScriptUIListViewModule } from "nativescript-ui-listview/angular";
 
 import { DeatilsRoutingModule } from "./deatils-routing.module";
 import { DeatilsComponent } from "./deatils.component";
+import { ModalViewComponent } from "./modal-view" 
+import { NativeScriptUIDataFormModule } from "nativescript-ui-dataform/angular";
 
 @NgModule({
     imports: [
         NativeScriptCommonModule,
         DeatilsRoutingModule,
-        NativeScriptUIListViewModule
+        NativeScriptUIListViewModule, 
+        NativeScriptUIDataFormModule
     ],
     declarations: [
-        DeatilsComponent
+        DeatilsComponent,
+        ModalViewComponent
     ],
     schemas: [
         NO_ERRORS_SCHEMA
-    ]
+    ],
+    entryComponents: [ModalViewComponent]
 })
 export class DeatilsModule { }

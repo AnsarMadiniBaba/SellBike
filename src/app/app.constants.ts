@@ -5,5 +5,6 @@ export class AppSettings  {
 export const Constant = {
     // endpoints
     GetAllBikes: "Dashboard/GetAllBikes",
+    Login: "User/Login",
  
  }

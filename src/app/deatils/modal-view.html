@@ -1,0 +1,27 @@
+<!--  >> passing-parameters-html -->
+<StackLayout class="modal-view-style" sdkExampleTitle sdkToggleNavButton>
+    <DatePicker #datepicker></DatePicker>
+    <Button class="btn btn-primary btn-active" text="Submit" (tap)="submit()"></Button>
+    <GridLayout rows="auto, auto, *">
+    <Button text="Check" row="0" (tap)="checkErrors()"></Button>
+    <StackLayout row="1" orientation="horizontal">
+        <Label text="hasValidationErrors:" class="label"></Label>
+        <Label #resultLabel class="label labelBold"></Label>
+    </StackLayout>
+    <RadDataForm tkExampleTitle tkToggleNavButton #myDataForm [source]="user" row="2">
+        <TKEntityProperty tkDataFormProperty name="name" index="0">
+            <TKNonEmptyValidator tkEntityPropertyValidators errorMessage="Name can't be empty."></TKNonEmptyValidator>
+            <TKMaximumLengthValidator tkEntityPropertyValidators errorMessage="Name can be at most 12 characters." length="12"></TKMaximumLengthValidator>
+        </TKEntityProperty>
+        <TKEntityProperty tkDataFormProperty name="email" displayName="E-mail" index="1">
+            <TKPropertyEditor tkEntityPropertyEditor type="Email"></TKPropertyEditor>
+            <TKEmailValidator tkEntityPropertyValidators></TKEmailValidator>
+        </TKEntityProperty>
+         
+        <TKEntityProperty tkDataFormProperty name="phoneNumber" displayName="Phone Number" index="2">
+            <TKPhoneValidator tkEntityPropertyValidators errorMessage="Incorrect phone number"></TKPhoneValidator>
+            <TKPropertyEditor tkEntityPropertyEditor type="Phone"></TKPropertyEditor>
+        </TKEntityProperty>
+    </RadDataForm> </GridLayout>
+</StackLayout>
+<!--  << passing-parameters-html -->

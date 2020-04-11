@@ -1,5 +1,13 @@
 <FlexboxLayout class="page">
-    <StackLayout class="form">
+    
+    
+    <StackLayout class="p-0" verticalAlignment="top">
+        <GridLayout columns="*,auto" rows="auto">
+            <Label class="bold" selectionBehavior="Press" (tap)="onSkipTap()" marginRight="25" marginTop="40"  color="#2874f0" fontSize="18" col="1" row="0"
+                text="Skip"></Label>
+        </GridLayout>
+    </StackLayout>
+    <StackLayout  class="p-t-0 form">
         <!-- <Image class="logo" src="~/images/logo.png"></Image> -->
         <Label class="header" text="BechoBaba"></Label>
 
@@ -16,37 +24,31 @@
                 <StackLayout row="1" class="input-field">
                     <TextField #password class="input" [isEnabled]="!processing"
                         hint="Password" secure="true" [(ngModel)]="user.password"
-                        [returnKeyType]="isLoggingIn ? 'done' : 'next'"
-                        (returnPress)="focusConfirmPassword()"></TextField>
+                        [returnKeyType]="isLoggingIn ? 'done' : 'next'"></TextField>
                     <StackLayout class="hr-light"></StackLayout>
                 </StackLayout>
-
-                <StackLayout row="2" *ngIf="!isLoggingIn" class="input-field">
-                    <TextField #confirmPassword class="input" [isEnabled]="!processing"
-                        hint="Confirm password" secure="true" [(ngModel)]="user.confirmPassword"
-                        returnKeyType="done"></TextField>
-                    <StackLayout class="hr-light"></StackLayout>
-                </StackLayout>
-
                 <ActivityIndicator rowSpan="3" [busy]="processing"></ActivityIndicator>
             </GridLayout>
         </PreviousNextView>
 
         <Button [text]="isLoggingIn ? 'Log In' : 'Sign Up'" [isEnabled]="!processing"
             (tap)="submit()" class="btn btn-primary m-t-20"></Button>
-        <Label *ngIf="isLoggingIn" text="Forgot password?" class="login-label"
-            (tap)="forgotPassword()"></Label>
+        <!-- <Label *ngIf="isLoggingIn" text="Forgot password?" class="login-label"
+            (tap)="forgotPassword()"></Label> -->
     </StackLayout>
-    <StackLayout>
-        <!-- <FormattedString>
+    <Label class="login-label sign-up-label" (tap)="toggleForm()">
+        <FormattedString>
             <Span [text]="isLoggingIn ? 'Don’t have an account? ' : 'Back to Login'"></Span>
             <Span [text]="isLoggingIn ? 'Sign up' : ''" class="bold"></Span>
-        </FormattedString> -->
+        </FormattedString>
+    </Label>
+    <!-- <StackLayout>
+        
         <GridLayout columns="*,*" rows="auto,auto,auto">
                 <Label class="loginlable" row="0" col="0" colSpan="2" text="LOGIN USING"></Label>
                 <StackLayout row="1" col="0" colSpan="2" class="hr m-10"></StackLayout>
                 <Button row="2" col="0" class="-outline bold" text="Google"></Button>
                 <Button row="2" col="1"  class="-outline bold" text="Facebook"></Button>
             </GridLayout>
-    </StackLayout>
+    </StackLayout> -->
 </FlexboxLayout>

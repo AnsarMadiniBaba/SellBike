@@ -1,12 +1,16 @@
 import { NgModule } from "@angular/core";
 import { Routes } from "@angular/router";
 import { NativeScriptRouterModule } from "nativescript-angular/router";
+import { AuthGuard } from "./auth-guard.service";
 
-const routes: Routes = [
+export const authProviders = [
+    AuthGuard
+  ];
+  export const routes = [
     { path: "", redirectTo: "/home", pathMatch: "full" },
     { path: "productdetails", loadChildren: () => import("~/app/productdetails/productdetails.module").then((m) => m.ProductdetailsModule) },
     { path: "login", loadChildren: () => import("~/app/login/login.module").then((m) => m.LoginModule) },
-    { path: "home", loadChildren: () => import("~/app/home/home.module").then((m) => m.HomeModule) },
+    { path: "home", loadChildren: () => import("~/app/home/home.module").then((m) => m.HomeModule)},
     { path: "browse", loadChildren: () => import("~/app/browse/browse.module").then((m) => m.BrowseModule) },
     { path: "search", loadChildren: () => import("~/app/search/search.module").then((m) => m.SearchModule) },
     { path: "featured", loadChildren: () => import("~/app/featured/featured.module").then((m) => m.FeaturedModule) },
@@ -16,9 +20,9 @@ const routes: Routes = [
     { path: "postad", loadChildren: () => import("~/app/postad/postad.module").then((m) => m.PostadModule) },
     { path: "filter", loadChildren: () => import("~/app/filter/filter.module").then((m) => m.FilterModule) }
    ];
-
-@NgModule({
+   @NgModule({
     imports: [NativeScriptRouterModule.forRoot(routes)],
     exports: [NativeScriptRouterModule]
 })
+
 export class AppRoutingModule { }

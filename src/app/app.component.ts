@@ -4,6 +4,7 @@ import { RouterExtensions } from "nativescript-angular/router";
 import { DrawerTransitionBase, RadSideDrawer, SlideInOnTopTransition } from "nativescript-ui-sidedrawer";
 import { filter } from "rxjs/operators";
 import * as app from "tns-core-modules/application";
+import { BackendService } from "./services/backend.service";
 
 @Component({
     selector: "ns-app",
@@ -22,8 +23,8 @@ export class AppComponent implements OnInit {
         this._sideDrawerTransition = new SlideInOnTopTransition();
 
         this.router.events
-        .pipe(filter((event: any) => event instanceof NavigationEnd))
-        .subscribe((event: NavigationEnd) => this._activatedUrl = event.urlAfterRedirects);
+            .pipe(filter((event: any) => event instanceof NavigationEnd))
+            .subscribe((event: NavigationEnd) => this._activatedUrl = event.urlAfterRedirects);
     }
 
     get sideDrawerTransition(): DrawerTransitionBase {
@@ -35,12 +36,13 @@ export class AppComponent implements OnInit {
     }
 
     onNavItemTap(navItemRoute: string): void {
+        if (navItemRoute = "/login")
+            BackendService.token = "";
         this.routerExtensions.navigate([navItemRoute], {
             transition: {
                 name: "fade"
             }
         });
-
         const sideDrawer = <RadSideDrawer>app.getRootView();
         sideDrawer.closeDrawer();
     }
