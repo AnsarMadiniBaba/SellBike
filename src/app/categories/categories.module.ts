@@ -5,6 +5,9 @@ import { NativeScriptUIListViewModule } from "nativescript-ui-listview/angular";
 import { CategoriesRoutingModule } from "./categories-routing.module";
 import { CategoriesComponent } from "./categories.component";
 
+import { ModalViewComponent } from "./modal-view" 
+import { BrandViewComponent } from "./brand-view";
+
 @NgModule({
     imports: [
         NativeScriptCommonModule,
@@ -12,10 +15,13 @@ import { CategoriesComponent } from "./categories.component";
         NativeScriptUIListViewModule
     ],
     declarations: [
-        CategoriesComponent
+        CategoriesComponent,
+        BrandViewComponent,
+        ModalViewComponent
     ],
     schemas: [
         NO_ERRORS_SCHEMA
-    ]
+    ],
+    entryComponents: [ModalViewComponent,BrandViewComponent]
 })
 export class CategoriesModule { }

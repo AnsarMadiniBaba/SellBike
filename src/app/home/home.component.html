@@ -144,6 +144,7 @@
                 </StackLayout>
             </ScrollView>
         </StackLayout>
+        <ActivityIndicator col="0" row="4"  [busy]="processing"></ActivityIndicator>
         <!-- <StackLayout  col="0" row="4" > 
             <Button text="Get My Location" (tap)="getLocation()" class="btn btn-primary"></Button>
     
@@ -154,9 +155,9 @@
             <Label text="{{ 'Address: ' + addr }}" class="lbl" textWrap="true"></Label>
         </StackLayout> -->
     </GridLayout>
-
+    
 </ScrollView>
-<FlexboxLayout (tap)="onNavItemTap('/postad')" verticalAlignment="bottom" justifyContent="flex-end" height="10%"
+<FlexboxLayout (tap)="onNavItemTap('/categories')" verticalAlignment="bottom" justifyContent="flex-end" height="10%"
     width="100%" id="addButtonContainer" left="0" marginBottom="10">
     <Button class="add-button" row="0" col="1" text="Post Ad"></Button>
 </FlexboxLayout>

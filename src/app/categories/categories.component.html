@@ -1,33 +1,23 @@
 <ActionBar class="action-bar">
     <NavigationButton android.systemIcon="ic_menu_back" (tap)="onNavBtnTap()"></NavigationButton>
-    <Label fontsize="22" text="Select Category" class="action-bar-label pull-left"></Label>
+    <Label fontsize="22" text="Select Brand / Model" class="action-bar-label pull-left"></Label>
 
 </ActionBar>
 
-<StackLayout class="page" class="parentelement">
-    <Label padding="10" class="font-weight-bold"  fontSize="20" color="#333333" [text]="hidesubcat?'Sub Categories':'Categories'"></Label>
-    <StackLayout marginBottom="7" class=" childelementborder" backgroundColor="White">
-        <RadListView  selectionBehavior="Press" (itemSelected)="onItemSelected($event)" class="list-group" [items]="listViewData">
-            <ng-template let-item="item">
-                <GridLayout orientation="horizontal" class="list-group-item p-7 m-5" rows="auto" columns="auto,auto,*,auto">
-                    <Label marginRight="-15" marginLeft="-15" col="0" row="0" text="&#xf013;" class="fas nt-icon" color="#b9b9b9"></Label>
-                    <Label fontSize="17" col="1" row="0" [text]="item.deatils"></Label>
-                    <Label col="3" row="0" horizontalAlignment="right" color="#b9b9b9" paddingRight="2" class="fas nt-icon"
-                        text="&#xf061;"></Label>
-                </GridLayout>
-            </ng-template>
-        </RadListView>
-    </StackLayout>
-    <!-- <StackLayout *ngIf="hidesubcat" marginBottom="7" class=" childelementborder" backgroundColor="White">
-            <RadListView selectionBehavior="Press"  class="list-group" [items]="subcatViewData">
-                <ng-template let-item="item">
-                    <GridLayout orientation="horizontal" class="list-group-item p-7 m-5" rows="auto" columns="auto,auto,*,auto">
-                        <Label marginRight="-15" marginLeft="-15" col="0" row="0" text="&#xf013;" class="fas nt-icon" color="#b9b9b9"></Label>
-                        <Label fontSize="17" col="1" row="0" [text]="item.deatils"></Label>
-                        <Label col="3" row="0" horizontalAlignment="right" color="#b9b9b9" paddingRight="2" class="fas nt-icon"
-                            text="&#xf061;"></Label>
-                    </GridLayout>
-                </ng-template>
-            </RadListView>
-        </StackLayout> -->
+<StackLayout class="page">
+
+    <GridLayout class="p-10" columns="*" rows="auto,auto">
+        <Label col="0" row="0" class="font-weight-bold header" fontSize="15" text="Brand / Model"></Label>
+        <GridLayout (tap)="onBrandModelTap()"  col="0" row="1" orientation="horizontal" class="list-group-item brandclass"
+            rows="auto,auto" columns="auto,auto,*,auto">
+            <Label col="1" row="0" [text]="brandmodal" fontSize="17"></Label>
+            <Label col="3" row="0" horizontalAlignment="right" color="#b9b9b9" paddingRight="2"
+                class="fas nt-icon" text="&#xf061;"></Label>
+            <StackLayout colSpan="4" col="0" row="2" height="2" backgroundColor="#b9b9b9"></StackLayout>
+        </GridLayout>
+    </GridLayout>
 </StackLayout>
+<FlexboxLayout verticalAlignment="bottom" justifyContent="center" height="10%" marginBottom="10">
+    <Button class="btn" fontWeight="600" backgroundColor="#2874f0" color="#FFFFFF" fontSize="17" text="Next"
+        width="100%" (tap)="onNextTap()"></Button>
+</FlexboxLayout>

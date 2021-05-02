@@ -1,0 +1,20 @@
+
+<StackLayout class="modal-view-style" sdkExampleTitle sdkToggleNavButton>
+    
+        <GridLayout  columns="auto" rows="auto, auto">
+        <Label col="0" row="0" fontWeight="700" paddingLeft="13" paddingTop="15" fontSize="20"
+        text="Select a Model"></Label> 
+        <RadListView width="300" height="80%" col="0" row="1" selectionBehavior="Press" (itemSelected)="onItemSelected($event)" class="list-group" [items]="modelsList">
+            <ListViewLinearLayout tkListViewLayout scrollDirection="Vertical"></ListViewLinearLayout>
+            <ng-template let-item="item">
+                <GridLayout  orientation="horizontal" class="list-group-item p-7 m-5" rows="auto" columns="auto,*,auto">
+                    <Label class="p-l-10" fontSize="17" col="0" row="0" [text]="item.model"></Label>
+                    <Label col="1" row="0" paddingRight="2" class="fas nt-icon"
+                        text=""></Label>
+                        <Label col="2" row="0" horizontalAlignment="right" color="#b9b9b9" paddingRight="2" class="fas nt-icon"
+                        text="&#xf061;"></Label>
+                </GridLayout>
+            </ng-template>
+        </RadListView>
+    </GridLayout> 
+</StackLayout>

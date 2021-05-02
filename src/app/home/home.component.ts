@@ -10,7 +10,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { ListViewEventData, RadListView } from "nativescript-ui-listview"
 import { NavigationExtras } from "@angular/router";
 import { AppSettings, Constant } from "../app.constants";
-
+import { ActivityIndicator } from "tns-core-modules/ui/activity-indicator";
  
 
 @Component({
@@ -20,10 +20,14 @@ import { AppSettings, Constant } from "../app.constants";
 })
 export class HomeComponent implements OnInit { 
     bikedetails: BikeDetails[];
+    processing = false;
     constructor(private routerExtensions: RouterExtensions,private http: HttpClient) {
+        this.processing = true;
         this.http.get<BikeDetails[]>(AppSettings.API_ENDPOINT + Constant.GetAllBikes).subscribe((result) => {
+            this.processing = false;
             this.bikedetails = result; 
         }, (error) => {
+            this.processing = false;
             console.log(error);
         });
         

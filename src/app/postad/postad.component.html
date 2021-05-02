@@ -1,46 +1,51 @@
 <ActionBar class="action-bar">
     <NavigationButton android.systemIcon="ic_menu_back" (tap)="onNavBtnTap()"></NavigationButton>
-    <Label fontsize="22" text="Post Ad" class="action-bar-label pull-left"></Label>
+    <Label fontsize="22" text="Add Some Deatils" class="action-bar-label pull-left"></Label>
 
 </ActionBar>
- 
-        <GridLayout rows="auto, auto, *">
-                <Button text="Check" row="0" (tap)="checkErrors()"></Button>
-                <StackLayout row="1" orientation="horizontal">
-                    <Label text="hasValidationErrors:" class="label"></Label>
-                    <Label #resultLabel class="label labelBold"></Label>
-                </StackLayout>
-                <RadDataForm tkExampleTitle tkToggleNavButton #myDataForm [source]="user" row="2">
-                    <TKEntityProperty tkDataFormProperty name="username" index="0">
-                        <TKNonEmptyValidator tkEntityPropertyValidators errorMessage="Username can't be empty."></TKNonEmptyValidator>
-                        <TKMaximumLengthValidator tkEntityPropertyValidators errorMessage="Username can be at most 12 characters." length="12"></TKMaximumLengthValidator>
-                    </TKEntityProperty>
-                    <TKEntityProperty tkDataFormProperty name="password" index="1">
-                        <TKPropertyEditor tkEntityPropertyEditor type="Password"></TKPropertyEditor>
-                        <TKMinimumLengthValidator tkEntityPropertyValidators errorMessage="Password must be at least 6 characters long." length="6"></TKMinimumLengthValidator>
-                    </TKEntityProperty>
-                    <TKEntityProperty tkDataFormProperty name="email" displayName="E-mail" index="2">
-                        <TKPropertyEditor tkEntityPropertyEditor type="Email"></TKPropertyEditor>
-                        <TKEmailValidator tkEntityPropertyValidators></TKEmailValidator>
-                    </TKEntityProperty>
-                    <TKEntityProperty tkDataFormProperty name="id" displayName="ID" index="3">
-                        <TKRangeValidator tkEntityPropertyValidators errorMessage="ID must be between 1-100." minimum="1" maximum="100"></TKRangeValidator>
-                        <TKPropertyEditor tkEntityPropertyEditor type="Number"></TKPropertyEditor>
-                    </TKEntityProperty>
-                    <TKEntityProperty tkDataFormProperty name="phoneNumber" displayName="Phone Number" index="4">
-                        <TKPhoneValidator tkEntityPropertyValidators errorMessage="Incorrect phone number"></TKPhoneValidator>
-                        <TKPropertyEditor tkEntityPropertyEditor type="Phone"></TKPropertyEditor>
-                    </TKEntityProperty>
-                    <TKEntityProperty tkDataFormProperty name="pin" displayName="Enter PIN" index="5">
-                        <TKRegExValidator tkEntityPropertyValidators regEx="\d{4}" errorMessage="PIN number should contain 4 digits."></TKRegExValidator>
-                        <TKPropertyEditor tkEntityPropertyEditor type="Phone"></TKPropertyEditor>
-                    </TKEntityProperty>
-                    <TKEntityProperty tkDataFormProperty name="agreeTerms" displayName="I agree with terms" index="6">
-                        <TKPropertyEditor tkEntityPropertyEditor type="Switch"></TKPropertyEditor>
-                        <TKIsTrueValidator tkEntityPropertyValidators errorMessage="You must agree with the terms."></TKIsTrueValidator>
-                    </TKEntityProperty>
-                </RadDataForm>
-            </GridLayout>
-             
+<ScrollView orientation="vertical">
+    <GridLayout rows="auto, auto">
+        <RadDataForm tkExampleTitle tkToggleNavButton #myDataForm [source]="user" row="0">
 
- 
+            <TKEntityProperty tkDataFormProperty name="price" displayName="Price*" index="0">
+                <TKRangeValidator tkEntityPropertyValidators errorMessage="Price must be between 1,000 - 30,00,000."
+                    minimum="1000" maximum="3000000"></TKRangeValidator>
+                <TKPropertyEditor tkEntityPropertyEditor type="Number"></TKPropertyEditor>
+            </TKEntityProperty>
+            <TKEntityProperty tkDataFormProperty name="kmdriven" displayName="KM driven*" index="1">
+                <TKRangeValidator tkEntityPropertyValidators errorMessage="KM driven must be between 1 - 10,00,000."
+                    minimum="1" maximum="1000000"></TKRangeValidator>
+                <TKPropertyEditor tkEntityPropertyEditor type="Number"></TKPropertyEditor>
+            </TKEntityProperty>
+            <TKEntityProperty tkDataFormProperty name="year" displayName="Manufacturing Year*" index="2">
+                <TKRangeValidator tkEntityPropertyValidators
+                    errorMessage="Manufacturing Year must be between 1900 - 2020." minimum="1900" maximum="2020">
+                </TKRangeValidator>
+                <TKPropertyEditor tkEntityPropertyEditor type="Number"></TKPropertyEditor>
+            </TKEntityProperty>
+            <TKEntityProperty tkDataFormProperty name="owners" displayName="How Many Owners*" index="3">
+                <TKRangeValidator tkEntityPropertyValidators errorMessage="How Many Owners must be between 1 - 5."
+                    minimum="1" maximum="5"></TKRangeValidator>
+                <TKPropertyEditor tkEntityPropertyEditor type="Number"></TKPropertyEditor>
+            </TKEntityProperty>
+            <TKEntityProperty tkDataFormProperty name="enginecap" displayName="Engine Capacity(In cc)*" index="4">
+                <TKRangeValidator tkEntityPropertyValidators
+                    errorMessage="Engine Capacity(In cc) must be between 100 - 3000." minimum="100" maximum="3000">
+                </TKRangeValidator>
+                <TKPropertyEditor tkEntityPropertyEditor type="Number"></TKPropertyEditor>
+            </TKEntityProperty>
+            <TKEntityProperty tkDataFormProperty name="describe" displayName="Discribe Bike Condition" index="5">
+                <!-- <TKNonEmptyValidator tkEntityPropertyValidators errorMessage="Description can't be empty."></TKNonEmptyValidator> -->
+                <TKMaximumLengthValidator tkEntityPropertyValidators
+                    errorMessage="Description can be at most 200 characters." length="100"></TKMaximumLengthValidator>
+            </TKEntityProperty>
+        </RadDataForm>
+        <StackLayout row="1" orientation="horizontal">
+            <Label text="*Required Fields" color="#b9b9b9" fontSize="12" class="label"></Label>
+        </StackLayout>
+    </GridLayout>
+</ScrollView>
+<FlexboxLayout verticalAlignment="bottom" justifyContent="center" height="10%" marginBottom="10">
+    <Button class="btn" fontWeight="600" backgroundColor="#2874f0" color="#FFFFFF" fontSize="17" text="Next"
+        width="100%" (tap)="checkErrors()"></Button>
+</FlexboxLayout>

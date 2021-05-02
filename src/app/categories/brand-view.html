@@ -1,0 +1,22 @@
+<StackLayout class="modal-view-style" sdkExampleTitle sdkToggleNavButton>
+
+    <GridLayout  columns="auto" rows="auto, auto, auto">
+        <Label col="0" row="0" fontWeight="700" paddingLeft="13" paddingTop="15" fontSize="20"
+        text="Select a Brand"></Label> 
+        <RadListView width="300" col="0" row="1" selectionBehavior="Press" (itemSelected)="onItemSelected($event)" class="list-group" [items]="brandList">
+            <ng-template let-item="item">
+                <GridLayout  orientation="horizontal" class="list-group-item p-7 m-5" rows="auto" columns="auto,*,auto">
+                    <Label class="p-l-10" fontSize="17" col="0" row="0" [text]="item.brand"></Label>
+                    <Label col="1" row="0" paddingRight="2" class="fas nt-icon"
+                        text=""></Label>
+                        <Label col="2" row="0" horizontalAlignment="right" color="#b9b9b9" paddingRight="2" class="fas nt-icon"
+                        text="&#xf061;"></Label>
+                        
+                </GridLayout>
+            </ng-template>
+        </RadListView>
+        <Label class="pull-right m-r-20 m-b-10 m-t-5" col="0" row="2" fontWeight="600" color="#2874f0" fontSize="17" text="Cancel"
+             (tap)="onCloseTap()"></Label>
+    </GridLayout> 
+
+</StackLayout>

@@ -5,10 +5,12 @@ import { SearchBar } from "tns-core-modules/ui/search-bar";
 import { RouterExtensions } from "nativescript-angular/router";
 import { ObservableArray } from "tns-core-modules/data/observable-array";
 import { RadDataFormComponent } from "nativescript-ui-dataform/angular";
-import { AdvancedUser } from "../models/user";
+import { AdvancedUser, PostAd } from "../models/user";
+import { ActivatedRoute } from "@angular/router";
+import { PostAddService } from "../services";
 
 
- 
+
 @Component({
     moduleId: module.id,
     selector: "Postad",
@@ -16,31 +18,49 @@ import { AdvancedUser } from "../models/user";
     styleUrls: ["./postad.component.scss"]
 })
 export class PostadComponent implements OnInit {
-    private _user: AdvancedUser;
+    private _postAd: PostAd;
+    private selectedcat: any;
 
-    constructor(private routerExtensions: RouterExtensions) {
-       
+    constructor(private routerExtensions: RouterExtensions, private route: ActivatedRoute, private postAddService: PostAddService) {
+        this.route.queryParams.subscribe(params => {
+            this.selectedcat = params["BrandAndModel"];
+            console.log(this.selectedcat);
+        })
     }
 
     ngOnInit() {
-        this._user = new AdvancedUser();
+        this._postAd = new PostAd();
     }
 
     @ViewChild("myDataForm", { static: false }) dataFormComp: RadDataFormComponent;
-    @ViewChild("resultLabel", { static: false }) resultLabel: ElementRef;
 
-    get user(): AdvancedUser {
-        return this._user;
+    get user(): PostAd {
+        return this._postAd;
     }
- 
+
     public checkErrors() {
         const hasErrors = this.dataFormComp.dataForm.hasValidationErrors();
-        this.resultLabel.nativeElement.text = hasErrors;
         console.log("clicked");
-        console.log(this._user);
+        console.log(this._postAd);
+        this.saveAdd();
     }
-        
-    onNavBtnTap(){
+
+    saveAdd() {
+        this.postAddService.postBikeAdd(this._postAd)
+            .subscribe(
+                (result) => {
+                    console.log(result);
+                    // this.processing = false;
+                    // this.bikedetails = result;
+                    // this.countOfRecords = result.length;
+                },
+                (error) => {
+                    alert("Somthing went wrong. Please try Changing the filters");
+                    // this.processing = false;
+                }
+            );
+    }
+    onNavBtnTap() {
         this.routerExtensions.back();
     }
 

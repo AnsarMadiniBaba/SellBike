@@ -15,8 +15,27 @@ export class User extends BaseUser {
 }
 export class UserBasicDeatils  {
     public email: string = "";
-    public phoneNumber: string = "";
+    public phone: string = "";
     public name: string = "";
+    constructor() {
+    }
+}
+
+export class PostAd  {
+    public price: number= null;
+    public year: number= null;
+    public kmdriven: number= null;
+    public owners:number= null;
+    public enginecap:number= null;
+    public describe:string= "";
+    constructor() {
+    }
+}
+
+export class RegisterUser  {
+    // public email: string = "";
+    public phone: string = "";
+    public password: string = "";
     constructor() {
     }
 }

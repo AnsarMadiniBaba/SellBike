@@ -1,27 +1,24 @@
-<!--  >> passing-parameters-html -->
+
 <StackLayout class="modal-view-style" sdkExampleTitle sdkToggleNavButton>
-    <DatePicker #datepicker></DatePicker>
-    <Button class="btn btn-primary btn-active" text="Submit" (tap)="submit()"></Button>
-    <GridLayout rows="auto, auto, *">
-    <Button text="Check" row="0" (tap)="checkErrors()"></Button>
-    <StackLayout row="1" orientation="horizontal">
-        <Label text="hasValidationErrors:" class="label"></Label>
-        <Label #resultLabel class="label labelBold"></Label>
-    </StackLayout>
-    <RadDataForm tkExampleTitle tkToggleNavButton #myDataForm [source]="user" row="2">
-        <TKEntityProperty tkDataFormProperty name="name" index="0">
-            <TKNonEmptyValidator tkEntityPropertyValidators errorMessage="Name can't be empty."></TKNonEmptyValidator>
-            <TKMaximumLengthValidator tkEntityPropertyValidators errorMessage="Name can be at most 12 characters." length="12"></TKMaximumLengthValidator>
+    <GridLayout rows="auto, auto, auto, auto">
+        <Label col="0" row="0" class="" paddingLeft="18" paddingTop="15" fontSize="18" color="#000000"
+        text="Please Enter User Deatils"></Label> 
+    <RadDataForm tkExampleTitle tkToggleNavButton #myDataForm [source]="user" row="1">
+        
+        <TKEntityProperty  tkDataFormProperty name="name" index="0">
+            <TKNonEmptyValidator paddingLeft="40" marginLeft="40" tkEntityPropertyValidators errorMessage="Name can't be empty."></TKNonEmptyValidator>
+            <TKMaximumLengthValidator paddingLeft="20" tkEntityPropertyValidators errorMessage="Name can be at most 12 characters." length="12"></TKMaximumLengthValidator>
         </TKEntityProperty>
         <TKEntityProperty tkDataFormProperty name="email" displayName="E-mail" index="1">
-            <TKPropertyEditor tkEntityPropertyEditor type="Email"></TKPropertyEditor>
-            <TKEmailValidator tkEntityPropertyValidators></TKEmailValidator>
+            <TKPropertyEditor paddingLeft="20" tkEntityPropertyEditor type="Email"></TKPropertyEditor>
+            <TKEmailValidator paddingLeft="20" tkEntityPropertyValidators></TKEmailValidator>
         </TKEntityProperty>
          
-        <TKEntityProperty tkDataFormProperty name="phoneNumber" displayName="Phone Number" index="2">
-            <TKPhoneValidator tkEntityPropertyValidators errorMessage="Incorrect phone number"></TKPhoneValidator>
-            <TKPropertyEditor tkEntityPropertyEditor type="Phone"></TKPropertyEditor>
+        <TKEntityProperty tkDataFormProperty name="phone" displayName="Phone Number" index="2">
+            <TKPhoneValidator paddingLeft="20" tkEntityPropertyValidators errorMessage="Incorrect phone number"></TKPhoneValidator>
+            <TKPropertyEditor paddingLeft="20" tkEntityPropertyEditor type="Phone"></TKPropertyEditor>
         </TKEntityProperty>
-    </RadDataForm> </GridLayout>
+    </RadDataForm> 
+    <Button class="p-t-7 p-b-10" text="Save" row="2" (tap)="checkErrors()" backgroundColor="#2874f0" color="#FFFFFF" fontSize="17"></Button>
+    <ActivityIndicator rowSpan="3" [busy]="processing"></ActivityIndicator> </GridLayout>
 </StackLayout>
-<!--  << passing-parameters-html -->

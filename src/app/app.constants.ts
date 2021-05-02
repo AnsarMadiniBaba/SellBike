@@ -6,5 +6,9 @@ export const Constant = {
     // endpoints
     GetAllBikes: "Dashboard/GetAllBikes",
     Login: "User/Login",
+    CreateUserFromCallButton: "User/CreateUserFromCallButton",
+    RegisterUser: "User/RegisterUser",
+    GetFilteredBikes:"Dashboard/GetFilteredBikes",
+    PostBikeAdd:"Dashboard/PostBikeAdd"
  
  }

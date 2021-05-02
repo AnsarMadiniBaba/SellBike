@@ -9,23 +9,11 @@ import { UserBasicDeatils, RegisterUser } from "../models/user";
 
 import { Constant } from "../app.constants";
 
+
 @Injectable()
-export class DashboardService {
+export class PostAddService {
   constructor(private http: HttpClient) { }
- 
-  getBikes(filteredBikes: any) {
-    return this.http.post(BackendService.baseUrl + Constant.GetFilteredBikes,JSON.stringify(filteredBikes), {
-      headers: this.getCommonHeaders()
-    })
-    .pipe(
-      tap((data: any) => {
-        console.log(data);
-        return data;
-      }),
-      catchError(this.handleErrors)
-    );
-  }
-  
+
   private getCommonHeaders() {
     return new HttpHeaders({
       "Content-Type": "application/json",
@@ -37,4 +25,18 @@ export class DashboardService {
     console.log(JSON.stringify(error));
     return throwError(error);
   }
+
+  postBikeAdd(addData: any) {
+    return this.http.post(BackendService.baseUrl + Constant.PostBikeAdd,JSON.stringify(addData), {
+      headers: this.getCommonHeaders()
+    })
+    .pipe(
+      tap((data: any) => {
+        console.log(data);
+        return data;
+      }),
+      catchError(this.handleErrors)
+    );
+  }
+
 }

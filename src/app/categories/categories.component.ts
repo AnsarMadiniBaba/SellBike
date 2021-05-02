@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewContainerRef } from "@angular/core";
 import { RadSideDrawer } from "nativescript-ui-sidedrawer";
 import * as app from "tns-core-modules/application";
 import { SearchBar } from "tns-core-modules/ui/search-bar";
@@ -8,8 +8,11 @@ import { ListViewEventData, RadListView } from "nativescript-ui-listview"
 import { Observable } from "rxjs";  
 import { Categories } from "../models/categories.model";  
 import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { NavigationExtras } from "@angular/router";
 
-
+import { ModalDialogService, ModalDialogOptions } from "nativescript-angular/modal-dialog";
+import { ModalViewComponent } from "./modal-view";
+import { BrandViewComponent } from "./brand-view";
 import { DashboardService } from "../services/dashboard.service";  
 interface DataItem {
     id: number;
@@ -30,6 +33,7 @@ interface DataItem {
 export class CategoriesComponent implements OnInit {
     hidesubcat = false;
     private _dataItems: ObservableArray<DataItem>;
+    private brandmodal: string = "Select Brand / Model";
     private _selectedItems: string;
     listViewData=[
         {
@@ -225,21 +229,65 @@ export class CategoriesComponent implements OnInit {
             cattype: 2
         }
     ]; 
+
+    brandList=[
+        {
+            id:1,
+            brand:"Hero"
+        },
+        {
+            id:2,
+            brand:"Honda"
+        },
+        
+        {
+            id:3,
+            brand:"KTM"
+        },
+        {
+            id:4,
+            brand:"Bajaj"
+        },
+        {
+            id:5,
+            brand:"Royal Enfield"
+        },
+        {
+            id:6,
+            brand:"Yamaha"
+        },
+        {
+            id:7,
+            brand:"TVS"
+        }
+        ,
+        {
+            id:8,
+            brand:"Suzuki"
+        } ,
+        {
+            id:9,
+            brand:"Other Brand"
+        }
+    ]
+    
+  
     
 
     private categories;  
-    constructor(private routerExtensions: RouterExtensions,private dashboardService:DashboardService,private http: HttpClient) {
-        console.log("entred");
+    constructor(private routerExtensions: RouterExtensions,private dashboardService:DashboardService,private http: HttpClient,
+        private modalService: ModalDialogService, private vcRef: ViewContainerRef) {
+        
         // this.categories = this.dashboardService.GetAllCategories();  
         // console.log(this.categories);
 
-        this.http.get<Categories[]>("http://192.168.0.4/APIBechoBaba/Api/Dashboard/GetAllCategories").subscribe((result) => {
-            console.log("yyyy");
-            this.categories = result;
-            console.log(result);
-        }, (error) => {
-            console.log(error);
-        });
+        // this.http.get<Categories[]>("http://192.168.0.4/APIBechoBaba/Api/Dashboard/GetAllCategories").subscribe((result) => {
+        //     console.log("yyyy");
+        //     this.categories = result;
+        //     console.log(result);
+        // }, (error) => {
+        //     console.log(error);
+        // });
     }
 
     ngOnInit(): void {
@@ -248,40 +296,115 @@ export class CategoriesComponent implements OnInit {
     onNavBtnTap() {
         this.routerExtensions.back();
     }
-
-
-    public onItemSelected(args: ListViewEventData) {
+    listViewData2 = [
+        {
+            deatils: "Motorcycles"
+        },
+        {
+            deatils: "Scooters"
+        }
+    ];
+    
+    public onItemSelected2(args: ListViewEventData) {
         const listview = args.object as RadListView;
         const selectedItems = listview.getSelectedItems() as Array<DataItem>;
-        let selectedTitles;
-        let selectedType;
-        for (let i = 0; i < selectedItems.length; i++) {
-            selectedTitles = selectedItems[i] ? selectedItems[i].deatils : "";
-            selectedType = selectedItems[i] ? selectedItems[i].cattype : "";
-            if (i < selectedItems.length - 1) {
-                selectedTitles += ", ";
-            }
+        let selectedcat;
+        selectedcat = selectedItems[0] ? selectedItems[0].deatils : "";
+        let routeExtras:NavigationExtras={
+            queryParams:{"selectedcat":selectedcat}
         }
+        this.routerExtensions.navigate(["/postad"],routeExtras);
+    }
 
-        this._selectedItems = selectedTitles;
-        // const selectedItem = this.dataItems.getItem(args.index);
-        if (selectedType === 1) {
-            // this.routerExtensions.navigate(["/deatils"]);
-            if(selectedTitles==="Properties")
-            this.listViewData = this.subPropertiescat;
-            if(selectedTitles==="Cars")
-            this.listViewData = this.subCarcat;
-            if(selectedTitles==="Bikes")
-            this.listViewData = this.subBikecat;
-            if(selectedTitles==="Mobiles")
-            this.listViewData = this.subMobilescat;
-            if(selectedTitles==="Electronics")
-            this.listViewData = this.subElectronicscat;
-            console.log("Item selected: " + (selectedTitles));
-        }
-        else {
-            console.log("Item selected: " + (selectedTitles));
-            this.routerExtensions.navigate(["/postad"]);
-        }
+    // public onItemSelected(args: ListViewEventData) {
+    //     const listview = args.object as RadListView;
+    //     const selectedItems = listview.getSelectedItems() as Array<DataItem>;
+    //     let selectedTitles;
+    //     let selectedType;
+    //     for (let i = 0; i < selectedItems.length; i++) {
+    //         selectedTitles = selectedItems[i] ? selectedItems[i].deatils : "";
+    //         selectedType = selectedItems[i] ? selectedItems[i].cattype : "";
+    //         if (i < selectedItems.length - 1) {
+    //             selectedTitles += ", ";
+    //         }
+    //     }
+
+    //     this._selectedItems = selectedTitles;
+    //     // const selectedItem = this.dataItems.getItem(args.index);
+    //     if (selectedType === 1) {
+    //         // this.routerExtensions.navigate(["/deatils"]);
+    //         if(selectedTitles==="Properties")
+    //         this.listViewData = this.subPropertiescat;
+    //         if(selectedTitles==="Cars")
+    //         this.listViewData = this.subCarcat;
+    //         if(selectedTitles==="Bikes")
+    //         this.listViewData = this.subBikecat;
+    //         if(selectedTitles==="Mobiles")
+    //         this.listViewData = this.subMobilescat;
+    //         if(selectedTitles==="Electronics")
+    //         this.listViewData = this.subElectronicscat;
+    //         console.log("Item selected: " + (selectedTitles));
+    //     }
+    //     else {
+    //         console.log("Item selected: " + (selectedTitles));
+    //         this.routerExtensions.navigate(["/postad"]);
+    //     }
+    // }
+
+    onBrandModelTap() {
+            this.createModelView().then(result => {
+                if (this.validate(result)) {
+                    console.log(result);
+                    this.onBrandselected(result);
+                }
+            }).catch(error => this.handleError(error)); 
+    }
+    onBrandselected(bandselected:any){
+        this.createModelView2(bandselected).then(result => {
+            if (this.validate(result)) {
+                this.brandmodal = result.brand +' / '+  result.model
+                this._selectedItems = result;
+                console.log(result); 
+            }
+        }).catch(error => this.handleError(error));
+    }
+
+    private createModelView2(bandselected:any): Promise<any> {
+        const options: ModalDialogOptions = {
+            viewContainerRef: this.vcRef,
+            context: bandselected,
+            fullscreen: false
+        };
+
+        // showModal returns a promise with the received parameters from the modal page
+        return this.modalService.showModal(ModalViewComponent, options);
+    }
+
+    private createModelView(): Promise<any> {
+        // const today = new Date();
+        const options: ModalDialogOptions = {
+            viewContainerRef: this.vcRef,
+            // context: this.bike.pin,
+            fullscreen: false
+        };
+
+        // showModal returns a promise with the received parameters from the modal page
+        return this.modalService.showModal(BrandViewComponent, options);
+    }
+
+    onNextTap(){
+    let routeExtras: NavigationExtras = {
+      queryParams: { "BrandAndModel": JSON.stringify(this._selectedItems) }
+    }
+    this.routerExtensions.navigate(["/postad"], routeExtras);
+    }
+
+    private validate(result: any) {
+        return !!result;
+    }
+
+    private handleError(error: any) {
+        alert("Please try again!");
+        console.dir(error);
     }
 }

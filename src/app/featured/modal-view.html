@@ -1,0 +1,19 @@
+
+<StackLayout class="modal-view-style" sdkExampleTitle sdkToggleNavButton>
+    
+        <GridLayout  columns="auto" rows="auto, auto">
+        <Label col="0" row="0" fontWeight="700" paddingLeft="13" paddingTop="15" fontSize="20"
+        text="Sort By"></Label> 
+        <RadListView width="250" col="0" row="1" selectionBehavior="Press" (itemSelected)="onItemSelected($event)" class="list-group" [items]="listViewData2">
+            <ng-template let-item="item">
+                <GridLayout  orientation="horizontal" class="list-group-item p-7 m-5" rows="auto" columns="auto,*,auto">
+                    <Label class="p-l-10" fontSize="17" col="0" row="0" [text]="item.details"></Label>
+                    <Label col="1" row="0" paddingRight="2" class="fas nt-icon"
+                        text=""></Label>
+                    <Label *ngIf="item.issort" col="2" row="0" color="green" paddingRight="2" class="fas nt-icon"
+                        text="&#xf00c;"></Label>
+                </GridLayout>
+            </ng-template>
+        </RadListView>
+    </GridLayout> 
+</StackLayout>

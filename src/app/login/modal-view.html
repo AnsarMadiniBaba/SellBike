@@ -1,0 +1,26 @@
+
+<StackLayout class="modal-view-style" sdkExampleTitle sdkToggleNavButton>
+    <GridLayout rows="auto, auto, auto, auto">
+        <Label col="0" row="0" class="" paddingLeft="18" paddingTop="15" fontSize="18" color="#000000"
+        text="Register"></Label> 
+        <RadDataForm tkExampleTitle tkToggleNavButton #myDataForm [source]="user" row="1">
+            <TKEntityProperty tkDataFormProperty name="phone" displayName="Phone Number" index="0">
+                <TKPhoneValidator tkEntityPropertyValidators errorMessage="Incorrect phone number"></TKPhoneValidator>
+                <TKPropertyEditor tkEntityPropertyEditor type="Phone"></TKPropertyEditor>
+                <TKMaximumLengthValidator tkEntityPropertyValidators
+                    errorMessage="Please enter your Ten digits Phone Number." length="10"></TKMaximumLengthValidator>
+                <TKMinimumLengthValidator tkEntityPropertyValidators
+                    errorMessage="Please enter your Ten digits Phone Number." length="10"></TKMinimumLengthValidator>
+                    
+
+            </TKEntityProperty>
+
+            <TKEntityProperty tkDataFormProperty name="password" index="1" displayName="Password">
+                <TKPropertyEditor tkEntityPropertyEditor type="Password"></TKPropertyEditor>
+                <TKMinimumLengthValidator tkEntityPropertyValidators
+                    errorMessage="Password must be at least 6 characters long." length="6"></TKMinimumLengthValidator>
+            </TKEntityProperty>
+        </RadDataForm>
+    <Button [isEnabled]="!processing" class="m-t-10 m-b-10" text="Register" row="2" (tap)="checkErrors()" backgroundColor="#2874f0" color="#FFFFFF" fontSize="17"></Button>
+    <ActivityIndicator rowSpan="3" [busy]="processing"></ActivityIndicator> </GridLayout>
+</StackLayout>

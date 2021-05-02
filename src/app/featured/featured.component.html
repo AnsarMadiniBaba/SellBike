@@ -1,58 +1,62 @@
 <ActionBar>
     <NavigationButton android.systemIcon="ic_menu_back" (tap)="onNavBtnTap()"></NavigationButton>
 
-    <Label fontsize="22" text="Electronics"></Label>
+    <Label fontsize="22" text="Bikes"></Label>
 </ActionBar>
 <StackLayout class="page" backgroundColor="#f8f8f8" orientation="vertical">
     
-        <StackLayout>
-                <GridLayout class="p-0 m-0" columns="*,auto,auto" rows="auto"> 
-                        <Button col="1" row="0"  class="-outline" text="Short" textWrap="true"></Button>
-                     
-                        <Button (tap)="onNavItemTap('/filter')" col="2" row="0"  class="-outline" text="Filter" textWrap="true"></Button>
-                    </GridLayout>
-        </StackLayout>
-    <RadListView id="list-view" [items]="news" separatorColor="transparent" height="100%">
-        <ng-template tkListItemTemplate let-item="item">
-            <StackLayout>
+    <StackLayout marginBottom="3" class="childelementborder" backgroundColor="White">
+        
+        <GridLayout class="p-0 m-0" columns="auto,*,auto,auto" rows="auto">
+            <Label row="0" col="0" fontSize="16" fontWeight="700" text="{{countOfRecords | number : fractionSize }}" class="pull-left m-l-10 m-t-12"></Label>
+            <Label row="0" col="1" fontSize="16" fontWeight="700" text="ads" class="pull-left m-l-5 m-t-12"></Label>
+            <GridLayout type="button" class="p-10" row="0" col="2" columns="auto,auto" rows="auto" (tap)="onShortTap()">
+                <Label [style.color]="sortselected===true ? 'green' : 'black'" col="0" text="&#xf160;"
+                    class="nt-icon fas m-t-5"></Label>
+                <Label [style.color]="sortselected===true ? 'green' : 'black'" fontWeight="700" fontSize="16.5" col="1"
+                    text="Sort" class="p-r-10 p-l-2"></Label></GridLayout>
+            <GridLayout class="p-10" row="0" col="3" columns="auto,auto" rows="auto" (tap)="onFilterTap()">
+                <Label [style.color]="filterselected===true ? 'green' : 'black'" col="0" text="&#xf0b0;"
+                    class="nt-icon fas m-t-5"></Label>
+                <Label [style.color]="filterselected===true ? 'green' : 'black'" fontWeight="700" fontSize="16.5"
+                    col="1" text="Filter" class="p-r-10 p-l-2"></Label></GridLayout>
+        </GridLayout>
+    </StackLayout>
+    <RadListView id="list-view" [items]="bikedetails" separatorColor="transparent" height="100%"
+        selectionBehavior="Press" (itemSelected)="onItemSelected($event)">
+        <ng-template tkListItemTemplate let-event="item">
+            <StackLayout marginBottom="7" class="childelementborder">
                 <GridLayout rows="*" backgroundColor="White">
-                    <GridLayout rows="*" columns="*">
-                        <!-- <Image src="{{ item.urlToImage }}" stretch="aspectFill" height="200"></Image> -->
+                    <GridLayout rows="auto" columns="auto,auto">
+                        <StackLayout width="55%" col="0" row="0" orientation="horizontal">
+                            <Image src="{{ '~/images/'+ event.images[0]  }}" stretch="aspectFill" height="130"
+                                width="100%"></Image>
+                        </StackLayout>
 
+                        <GridLayout rows="auto,auto,auto,auto,*,auto,auto" columns="*" width="45%" col="1" row="0"
+                            backgroundColor="White">
+                            <Label marginTop="7" col="0" row="0" class="cost p-0" text="{{ 'Rs '+event.price }}"
+                                textWrap="true"></Label>
+                            <Label col="0" row="1" class="title p-0 m-0" text="{{ event.brand +' - '+ event.model }}"
+                                textWrap="true"></Label>
+                            <Label col="0" row="2" class="title   p-0 m-0"
+                                text="{{ event.year +' - '+ event.kmdriven+' KM' }}" textWrap="true"></Label>
+                            <Label col="0" row="3" class="title   p-0 m-0" text="{{ event.owners +' owners' }}"
+                                textWrap="true"></Label>
+                            <Label col="0" row="4" rowSpan="2" class="p-0 m-0" text=""></Label>
+                            <Label col="0" row="5" class="location   p-0 m-0"
+                                text="{{event.landmark +', '+ event.city}}" textWrap="true"></Label>
 
-                        <RadListView selectionBehavior="Press" (itemSelected)="onItemSelected($event)"  width="100%" id="list-views" [items]="item.source" separatorColor="transparent"
-                            height="100%">
-                            <ListViewLinearLayout tkListViewLayout scrollDirection="Horizontal"></ListViewLinearLayout>
-
-                            <ng-template tkListItemTemplate let-event="item">
-
-                                <StackLayout orientation="horizontal">
-                                    <Image src="{{ event.name }}" stretch="aspectFill" height="110" width="15%"></Image>
-
-                                </StackLayout>
-                            </ng-template>
-                        </RadListView>
-                        <GridLayout verticalAlignment="top">
-                            <StackLayout>
-                                <!-- <Label text="this" class="pull-right"></Label> -->
-                                <Label col="0" text="&#xf004;" class="nt-icon fas labelicon pull-right"></Label>
-                            </StackLayout>
+                            <Label col="0" row="6" rowSpan="2" class="postdate   p-0 m-0" text="{{event.dateposted}}"
+                                textWrap="true"></Label>
                         </GridLayout>
                     </GridLayout>
+
                 </GridLayout>
-                <StackLayout  backgroundColor="White">
-                    <Label  class="cost   p-0 m-0" text="{{ 'Rs '+item.cost }}" textWrap="true"></Label>
-                    <Label   class="title p-0 m-0" text="{{ 'Hundai i20 '+item.title }}"  textWrap="true"></Label>
-                    <Label class="title   p-0 m-0" text="2012-40000km"  textWrap="true"></Label>
-                    <GridLayout class="p-0 m-0" columns="*,auto" rows="auto"> 
-                    <!-- <Label col="0" row="0" text="&#xf3c5;" class="nt-icon labelicon fas pull-left"></Label> -->
-                    <Label class="location   p-0 m-0" col="0" row="0" text="Maripalam, vizag"  textWrap="true"></Label>
-                    <Label class="postdate   p-0 m-0" col="1" row="0" text="Today"  textWrap="true"></Label>
-                    <!-- <Button col="1" row="0"  class="btn-sm pull-right -primary -rounded-sm" text="Buy Now" textWrap="true"></Button> -->
-                </GridLayout>
-                </StackLayout>
             </StackLayout>
         </ng-template>
     </RadListView>
-
+    <StackLayout>
+        <ActivityIndicator [busy]="processing"></ActivityIndicator>
+    </StackLayout>
 </StackLayout>

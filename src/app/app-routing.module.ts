@@ -2,6 +2,7 @@ import { NgModule } from "@angular/core";
 import { Routes } from "@angular/router";
 import { NativeScriptRouterModule } from "nativescript-angular/router";
 import { AuthGuard } from "./auth-guard.service";
+import { MyadsComponent } from "./myads/myads.component";
 
 export const authProviders = [
     AuthGuard
@@ -18,7 +19,8 @@ export const authProviders = [
     { path: "deatils", loadChildren: () => import("~/app/deatils/deatils.module").then((m) => m.DeatilsModule) },
     { path: "categories", loadChildren: () => import("~/app/categories/categories.module").then((m) => m.CategoriesModule) },
     { path: "postad", loadChildren: () => import("~/app/postad/postad.module").then((m) => m.PostadModule) },
-    { path: "filter", loadChildren: () => import("~/app/filter/filter.module").then((m) => m.FilterModule) }
+    { path: "filter", loadChildren: () => import("~/app/filter/filter.module").then((m) => m.FilterModule) },
+    { path: "myads", component: MyadsComponent },
    ];
    @NgModule({
     imports: [NativeScriptRouterModule.forRoot(routes)],

@@ -1,16 +1,17 @@
 import { Component, OnInit, ViewContainerRef } from "@angular/core";
 import { RadSideDrawer } from "nativescript-ui-sidedrawer";
 import * as app from "tns-core-modules/application";
-import { SearchBar } from "tns-core-modules/ui/search-bar";
 import { RouterExtensions } from "nativescript-angular/router";
 import { ObservableArray } from "tns-core-modules/data/observable-array";
 import { Page } from "tns-core-modules/ui/page";
 import { ActivatedRoute } from "@angular/router";
-import { BikeDetails } from "../models/bikedetails.model"; 
+import { BikeDetails } from "../models/bikedetails.model";
 import { ModalDialogService, ModalDialogOptions } from "nativescript-angular/modal-dialog";
 import { ModalViewComponent } from "./modal-view";
+import { BackendService } from "../services/backend.service";
+import * as TNSPhone from 'nativescript-phone';
 
- 
+
 @Component({
     selector: "Deatils",
     templateUrl: "./deatils.component.html",
@@ -18,29 +19,29 @@ import { ModalViewComponent } from "./modal-view";
 })
 export class DeatilsComponent implements OnInit {
     heart = false;
-    bike:BikeDetails;
-    images:any;
-    listViewData:any;
-    otherSpecs:any;
+    bike: BikeDetails;
+    images: any;
+    listViewData: any=[];
+    otherSpecs: any=[];
 
-    getHeartStatus(){
-    //pending to get the user faverate bikes sql lite
+    getHeartStatus() {
+        //pending to get the user faverate bikes sql lite
     }
-    onHeartTap(){
+    onHeartTap() {
         this.heart = !this.heart;
         //insert a record of user fav
     }
-    constructor(private page: Page,private routerExtensions: RouterExtensions,private route:ActivatedRoute,
-         private modalService: ModalDialogService, private vcRef: ViewContainerRef) {
+    constructor(private page: Page, private routerExtensions: RouterExtensions, private route: ActivatedRoute,
+        private modalService: ModalDialogService, private vcRef: ViewContainerRef) {
         page.actionBarHidden = true;
-        this.route.queryParams.subscribe(params=>{
-            this.bike=JSON.parse(params["bike"])[0];
+        this.route.queryParams.subscribe(params => {
+            this.bike = JSON.parse(params["bike"])[0];
             console.log(this.bike);
         })
         this.getHeartStatus();
-        this.images = this.bike.images; 
+        this.images = this.bike.images;
         this.listViewData = [
-            { 
+            {
                 deatils: "Brand",
                 value: this.bike.brand
             },
@@ -59,7 +60,7 @@ export class DeatilsComponent implements OnInit {
             {
                 deatils: "KM Driven",
                 value: this.bike.kmdriven
-            } 
+            }
         ];
         this.otherSpecs = [
             // { 
@@ -81,16 +82,30 @@ export class DeatilsComponent implements OnInit {
             {
                 deatils: "Engine Capacity(Cc)",
                 value: this.bike.enginecap
-            } 
+            }
         ]
     }
-    public startDate: Date;
-    getStartDate() {
-        this.createModelView().then(result => {
-            if (this.validate(result)) {
-                this.startDate = result;
-            }
-        }).catch(error => this.handleError(error));
+
+    onCallTap() {
+        if (BackendService.token === "token") {
+            this.createModelView().then(result => {
+                TNSPhone.requestCallPermission('You should accept the permission to be able to make a direct phone call.')
+                            .then(() => TNSPhone.dial(this.bike.pin, false))
+                            .catch(() => TNSPhone.dial(this.bike.pin, true));
+                // if (this.validate(result)) {
+                // }
+            }).catch(error => this.handleError(error));
+        }
+        else {
+            TNSPhone.requestCallPermission('You should accept the permission to be able to make a direct phone call.')
+                            .then(() => TNSPhone.dial(this.bike.pin, false))
+                            .catch(() => TNSPhone.dial(this.bike.pin, true));
+            // this.createModelView().then(result => {
+            //     if (this.validate(result)) {
+            //     }
+            // }).catch(error => this.handleError(error));
+            //get the number if he his loged in and display in dailer screen
+        }
     }
     private validate(result: any) {
         return !!result;
@@ -100,12 +115,12 @@ export class DeatilsComponent implements OnInit {
         alert("Please try again!");
         console.dir(error);
     }
-    
+
     private createModelView(): Promise<any> {
-        const today = new Date();
+        // const today = new Date();
         const options: ModalDialogOptions = {
             viewContainerRef: this.vcRef,
-            context: today.toDateString(),
+            // context: this.bike.pin,
             fullscreen: false
         };
 
@@ -117,14 +132,10 @@ export class DeatilsComponent implements OnInit {
         // Init your component properties here.
     }
 
-     
-    onNavBtnTap(){
+
+    onNavBtnTap() {
         this.routerExtensions.back();
     }
 
-    callToAdvertiser(){
-        //check if user loged in
-        //if not logged popup to give deatils
-        // else how the contact number
-    }
+
 }

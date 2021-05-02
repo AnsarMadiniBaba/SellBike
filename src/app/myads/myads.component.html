@@ -1,0 +1,45 @@
+<ActionBar>
+    <NavigationButton android.systemIcon="ic_menu_back" (tap)="onNavBtnTap()"></NavigationButton>
+
+    <Label fontsize="22" text="My Ads"></Label>
+</ActionBar>
+
+<StackLayout class="page" backgroundColor="#f8f8f8" orientation="vertical">
+    <RadListView id="list-view" [items]="bikedetails" separatorColor="transparent" height="100%"
+    selectionBehavior="Press">
+    <ng-template tkListItemTemplate let-event="item">
+        <StackLayout marginBottom="7" class="childelementborder">
+            <GridLayout rows="*" backgroundColor="White">
+                <GridLayout rows="auto" columns="auto,auto">
+                    <StackLayout width="55%" col="0" row="0" orientation="horizontal">
+                        <!-- <Image src="{{ '~/images/'+ event.images[0]  }}" stretch="aspectFill" height="130"
+                            width="100%"></Image> -->
+                    </StackLayout>
+
+                    <GridLayout rows="auto,auto,auto,auto,*,auto,auto" columns="*" width="45%" col="1" row="0"
+                        backgroundColor="White">
+                        <Label marginTop="7" col="0" row="0" class="cost p-0" text="{{ 'Rs '+event.price }}"
+                            textWrap="true"></Label>
+                        <Label col="0" row="1" class="title p-0 m-0" text="{{ event.brand +' - '+ event.model }}"
+                            textWrap="true"></Label>
+                        <Label col="0" row="2" class="title   p-0 m-0"
+                            text="{{ event.year +' - '+ event.kmdriven+' KM' }}" textWrap="true"></Label>
+                        <Label col="0" row="3" class="title   p-0 m-0" text="{{ event.owners +' owners' }}"
+                            textWrap="true"></Label>
+                        <Label col="0" row="4" rowSpan="2" class="p-0 m-0" text=""></Label>
+                        <Label col="0" row="5" class="location   p-0 m-0"
+                            text="{{event.landmark +', '+ event.city}}" textWrap="true"></Label>
+
+                        <Label col="0" row="6" rowSpan="2" class="postdate   p-0 m-0" text="{{event.dateposted}}"
+                            textWrap="true"></Label>
+                    </GridLayout>
+                </GridLayout>
+
+            </GridLayout>
+        </StackLayout>
+    </ng-template>
+</RadListView>
+<StackLayout>
+    <ActivityIndicator [busy]="processing"></ActivityIndicator>
+</StackLayout>
+</StackLayout>
